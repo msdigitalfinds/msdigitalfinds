@@ -197,18 +197,36 @@ container.innerHTML+=`
 </div>`;
 });
 }
-
 function openProduct(id){
 const product=products.find(p=>p.id===id);
+
+const related = products.filter(p =>
+p.category === product.category && p.id !== product.id
+);
+
+let relatedHTML = "";
+related.slice(0,4).forEach(r=>{
+relatedHTML += `
+<div style="width:150px;display:inline-block;margin:10px;cursor:pointer" onclick="openProduct(${r.id})">
+<img src="${r.image}" width="100%">
+<p style="font-size:14px">${r.name}</p>
+</div>
+`;
+});
+
 document.getElementById("modalData").innerHTML=`
 <h2>${product.name}</h2>
 <img src="${product.image}" width="250">
 <p><strong>Price:</strong> ₹${product.price}</p>
 <p>${product.desc}</p>
 <a class="btn" href="${product.affiliate}" target="_blank">Buy on Amazon</a>
+
+<h3 style="margin-top:30px">Related Products</h3>
+<div>${relatedHTML}</div>
 `;
+
 document.getElementById("productModal").style.display="block";
-}
+  }
 
 function closeModal(){
 document.getElementById("productModal").style.display="none";
