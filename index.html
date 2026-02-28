@@ -93,8 +93,6 @@ footer{ background: var(--dark); color:white; text-align:center; padding:30px; m
 </footer>
 
 <script>
-// --- UNLIMITED PRODUCTS SECTION ---
-// Ya list madhe tumhi kitihi hazaro products add karu shakta.
 const products = [
     { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional photography camera.", affiliate:"https://amzn.to/4s8VcbX" },
     { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Hybrid ANC earbuds with 50H playtime.", affiliate:"https://amzn.to/3OGT64L" },
@@ -105,7 +103,6 @@ const products = [
     { id:7, name:"Pen Drive 64GB", price:599, category:"computer", image:"https://via.placeholder.com/300", desc:"USB 3.0 high speed drive.", affiliate:"https://amzn.to/yourlink7" },
     { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Mirrorless camera for vlogging.", affiliate:"https://amzn.to/4bcVp8l" },
     { id:9, name:"boAt Nirvana Crown", price:2799, category:"audio", image:"boats airbords.jpg", desc:"Spatial audio & 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" }
-    // Navin product add krayla ithe comma (,) deun pudhe lihal...
 ];
 
 let currentTab = 'featured';
@@ -113,8 +110,6 @@ let currentTab = 'featured';
 function displayProducts(data) {
     const container = document.getElementById("products");
     container.innerHTML = "";
-    
-    // Featured tab sathi fakt pahile 6 products dakhvne
     let displayData = (currentTab === 'featured') ? data.slice(0, 8) : data;
 
     displayData.forEach(p => {
@@ -126,35 +121,50 @@ function displayProducts(data) {
             <button style="width:100%; padding:10px; background:#facc15; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">View Details</button>
         </div>`;
     });
-
-   
-    document.getElementById("loadMoreDiv").style.display = (currentTab === 'featured' && data.length > 6) ? "block" : "none";
-}
-
-function changeTab(tab) {
-    currentTab = tab;
-    document.getElementById("featuredTab").classList.toggle("active", tab === 'featured');
-    document.getElementById("allTab").classList.toggle("active", tab === 'all');
-    
-    if(tab === 'all') {
-        document.getElementById("filterSection").style.display = "flex";
-    }
-    displayProducts(products);
-}
-
-function loadAllProducts() {
-    changeTab('all');
+    document.getElementById("loadMoreDiv").style.display = (currentTab === 'featured' && data.length > 8) ? "block" : "none";
 }
 
 function openProduct(id){
-    const product=products.find(p=>p.id===id);
+    const product = products.find(p => p.id === id);
+
+    // Same category madhle related products (current product sodun)
+    const related = products.filter(p => 
+        p.category === product.category && p.id !== id
+    ).slice(0,3);
+
+    let relatedHTML = "";
+
+    if(related.length > 0){
+        relatedHTML = `
+        <h3 style="margin-top:30px; border-top:1px solid #ddd; padding-top:15px;">You may also like</h3>
+        <div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
+        ${related.map(r => `
+            <div style="width:120px; cursor:pointer; padding:5px; border:1px solid #eee; border-radius:10px;" onclick="openProduct(${r.id})">
+                <img src="${r.image}" style="width:100%; height:80px; object-fit:contain;">
+                <p style="font-size:11px; margin:5px 0; height:30px; overflow:hidden;">${r.name}</p>
+                <p style="font-size:12px; font-weight:bold; color:#0f172a;">₹${r.price.toLocaleString('en-IN')}</p>
+            </div>
+        `).join("")}
+        </div>
+        `;
+    }
+
     document.getElementById("modalData").innerHTML=`
         <h2 style="color:#0f172a">${product.name}</h2>
         <img src="${product.image}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" style="max-width:250px; width:100%; border-radius:10px; margin: 20px 0;">
-        <p class="price" style="color:#e44d26; font-size:1.5rem">Price: ₹${product.price.toLocaleString('en-IN')}</p>
-        <p style="padding:15px; background:#f9f9f9; border-radius:10px; font-size:14px;">${product.desc}</p>
-        <a class="btn-buy" href="${product.affiliate}" target="_blank">🛒 Buy on Amazon</a>
+        <p class="price" style="color:#e44d26; font-size:1.5rem">
+            Price: ₹${product.price.toLocaleString('en-IN')}
+        </p>
+        <p style="padding:15px; background:#f9f9f9; border-radius:10px; font-size:14px; line-height:1.5;">
+            ${product.desc}
+        </p>
+        <a class="btn-buy" href="${product.affiliate}" target="_blank">
+            Check Latest Price on Amazon
+        </a>
+
+        ${relatedHTML}
     `;
+
     document.getElementById("productModal").style.display="block";
     document.body.style.overflow = "hidden";
 }
@@ -162,6 +172,17 @@ function openProduct(id){
 function closeModal(){
     document.getElementById("productModal").style.display="none";
     document.body.style.overflow = "auto";
+}
+
+function changeTab(tab) {
+    currentTab = tab;
+    document.getElementById("featuredTab").classList.toggle("active", tab === 'featured');
+    document.getElementById("allTab").classList.toggle("active", tab === 'all');
+    displayProducts(products);
+}
+
+function loadAllProducts() {
+    changeTab('all');
 }
 
 function filterProducts(){
@@ -174,7 +195,6 @@ function filterProducts(){
     displayProducts(filtered);
 }
 
-// Initial display
 displayProducts(products);
 
 window.onclick = function(event) {
