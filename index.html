@@ -175,7 +175,6 @@ function renderGrid() {
         const stocks = Math.floor(Math.random() * 5) + 2;
         container.innerHTML += `
             <div class="card" onclick="openProduct(${p.id})">
-                <span class="badge">Hot Deal</span>
                 <img src="${p.image}" alt="${p.name}">
                 <p class="urgency-small">⚡ Only ${stocks} Left in Stock!</p>
                 <h3>${p.name}</h3>
