@@ -3,222 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS Digital Store | Premium Tech Deals</title>
+    <title>MS Digital Store | Best Tech Deals</title>
     
-    <meta name="description" content="MS Digital Store वर सर्वोत्तम टेक डील्स मिळवा. कॅमेरा, लॅपटॉप आणि स्मार्ट वॉचेसवर विशेष सवलत.">
-    <meta name="keywords" content="Tech Deals, Amazon Affiliate, MS Digital, Gadgets, Laptops, Cameras">
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "name": "MS Digital Store",
-      "description": "Best curated tech products from Amazon."
-    }
-    </script>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'YOUR-ID');
-    </script>
-
     <style>
         :root { --primary: #facc15; --amazon: #ff9900; --dark: #0f172a; --light: #f8fafc; }
-        body { font-family: 'Inter', sans-serif; margin:0; background: var(--light); color: #1e293b; }
-        header { background: var(--dark); color:white; padding:30px; text-align:center; }
-        .container { width:92%; max-width:1200px; margin:20px auto; }
-        
-        /* Product Grid */
-        .product-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:20px; }
-        .card { background:white; padding:15px; border-radius:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; text-align:center; transition: 0.3s; position: relative;}
-        .card:hover { transform: translateY(-5px); }
-        .card img { max-width: 100%; height: 180px; object-fit: contain; }
-        .price { font-size: 1.3rem; font-weight: 800; color: #b91c1c; }
-        
-        /* Full Product View (Amazon Style) */
-        #single-product-page { display:none; background:white; min-height:100vh; padding:20px; }
-        .product-layout { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px; }
-        .product-image-box { flex: 1; min-width: 300px; text-align: center; }
-        .product-image-box img { max-width: 100%; border-radius: 20px; }
-        .product-info-box { flex: 1; min-width: 300px; }
-        
-        /* UI Elements */
-        .btn { padding: 12px 25px; border-radius: 8px; border:none; cursor:pointer; font-weight:bold; width: 100%; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; }
-        .btn-amazon { background: var(--amazon); color: white; font-size: 1.2rem; }
-        .btn-wish { background: #f1f5f9; color: #64748b; }
-        .btn-back { background: var(--dark); color: white; width: auto; margin-bottom: 20px; }
-        
-        .urgency { color: #b91c1c; font-weight: bold; margin: 10px 0; font-size: 0.9rem; }
-        .related-grid { display: flex; gap: 15px; overflow-x: auto; padding: 10px 0; }
-        .related-card { min-width: 150px; background: #fff; padding: 10px; border-radius: 10px; border: 1px solid #eee; text-align: center; }
-        .related-card img { width: 80px; height: 80px; object-fit: contain; }
+        body { font-family: 'Inter', sans-serif; margin:0; background: var(--light); color: #1e293b; line-height: 1.5; }
+        header { background: var(--dark); color:white; padding:15px; text-align:center; position: sticky; top: 0; z-index: 100; }
+        header h1 { margin: 0; font-size: 1.5rem; color: var(--primary); }
 
-        .section-title { border-bottom: 2px solid var(--primary); display: inline-block; margin: 30px 0 15px 0; padding-bottom: 5px; }
-        .pagination { text-align: center; margin: 30px 0; }
-        .page-btn { padding: 10px 20px; background: var(--dark); color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .container { width:95%; max-width:1200px; margin:10px auto; }
+        
+        /* Filters Section */
+        .filter-section { background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .search-box { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px; font-size: 16px; outline: none; }
+        .filter-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        select { padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; background: #fff; outline: none; }
+
+        /* Product Grid: 2 side-by-side on mobile */
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        
+        @media (min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        }
+
+        .card { background:white; padding:10px; border-radius:12px; border: 1px solid #eee; cursor: pointer; text-align:center; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .card img { width: 100%; height: 130px; object-fit: contain; margin-bottom: 8px; }
+        .card h3 { font-size: 0.85rem; margin: 5px 0; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #334155; }
+        .price { font-size: 1.1rem; font-weight: 800; color: #b91c1c; margin-bottom: 5px; }
+        .view-btn { background: #f1f5f9; border: none; padding: 6px; border-radius: 6px; font-size: 12px; font-weight: bold; color: #475569; }
+        
+        /* Detail Page */
+        #single-product-page { display:none; background:white; min-height:100vh; padding:20px; }
+        .btn { padding: 15px; border-radius: 10px; border:none; cursor:pointer; font-weight:bold; width: 100%; display: block; text-align: center; text-decoration: none; }
+        .btn-amazon { background: var(--amazon); color: white; margin-top: 15px; font-size: 1.1rem; }
+        .btn-back { background: var(--dark); color: white; width: auto; margin-bottom: 20px; display: inline-block; padding: 10px 20px; }
+        
+        .pagination { text-align: center; margin: 30px 0; display: flex; justify-content: center; align-items: center; gap: 15px; }
+        .page-btn { padding: 10px 20px; background: var(--dark); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .page-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+        #pageInfo { font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div id="main-store">
-    <header>
-        <h1>MS Digital Store</h1>
-        <p>Verified Tech Deals & Gadgets</p>
-    </header>
+    <header><h1>MS Digital Store</h1></header>
+    
     <div class="container">
-        <h2 class="section-title">All Products</h2>
-        <div class="product-grid" id="products-container"></div>
-        <div class="pagination">
-            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
-            <span id="pageInfo" style="margin: 0 15px; font-weight: bold;">Page 1</span>
-            <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+        <div class="filter-section">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search gadgets..." oninput="updateFilters()">
+            
+            <div class="filter-controls">
+                <select id="catFilter" onchange="updateFilters()">
+                    <option value="all">सर्व कॅटेगरी</option>
+                    <option value="camera">Cameras</option>
+                    <option value="audio">Audio/Earbuds</option>
+                    <option value="laptop">Laptops</option>
+                    <option value="watch">Smart Watches</option>
+                    <option value="computer">Computer Acc.</option>
+                    <option value="mobile">Mobile Acc.</option>
+                    <option value="gaming">Gaming Gear</option>
+                    <option value="storage">Storage/SSD</option>
+                    <option value="smart">Smart Home</option>
+                    <option value="office">Office Tech</option>
+                    <option value="tv">TV & Video</option>
+                    <option value="tablet">Tablets</option>
+                    <option value="networking">Routers/Wi-Fi</option>
+                    <option value="power">Power Banks</option>
+                    <option value="kitchen">Smart Kitchen</option>
+                    <option value="fashion">Tech Fashion</option>
+                </select>
+
+                <select id="priceFilter" onchange="updateFilters()">
+                    <option value="all">सर्व किंमत</option>
+                    <option value="199-399">₹199 - ₹399</option>
+                    <option value="399-599">₹399 - ₹599</option>
+                    <option value="599-899">₹599 - ₹899</option>
+                    <option value="899-1000">₹899 - ₹1000</option>
+                    <option value="1000-4000">₹1000 - ₹4000</option>
+                    <option value="5000-15000">₹5000 - ₹15000</option>
+                    <option value="15000plus">₹15000 च्या वर</option>
+                </select>
+            </div>
         </div>
 
-        <h2 class="section-title">Recently Viewed</h2>
-        <div class="related-grid" id="recent-container"></div>
+        <div class="product-grid" id="products-container"></div>
+        
+        <div class="pagination">
+            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">Prev</button>
+            <span id="pageInfo">Page 1</span>
+            <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
     </div>
 </div>
 
 <div id="single-product-page" class="container">
-    <button class="btn btn-back" onclick="showStore()">← Back to Store</button>
+    <button class="btn btn-back" onclick="showStore()">← मागे जा</button>
     <div id="product-content"></div>
-    
-    <h3 class="section-title">Related Products</h3>
-    <div class="related-grid" id="related-container"></div>
 </div>
 
 <script>
 const products = [
-    { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional 4K Mirrorless Camera for high-end photography.", affiliate:"https://amzn.to/4s8VcbX" },
-    { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Noise cancelling wireless earbuds with deep bass.", affiliate:"https://amzn.to/3OGT64L" },
-    { id:3, name:"Apple AirPods", price:23990, category:"audio", image:" apple airpods.jpg", desc:"Original Apple spatial audio experience.", affiliate:"https://amzn.to/3OBvBKx" },
-    { id:4, name:"Charging Cable", price:999, category:"accessories", image:"charge.jpg", desc:"Type-C to Type-C 100W fast charging.", affiliate:"https://amzn.to/4rFiTsz" },
-    { id:5, name:"HP Laptop", price:68990, category:"laptop", image:"hp laptop.jpg", desc:"High performance laptop for gaming and work.", affiliate:"https://amzn.to/4aI8Q04" },
-    { id:6, name:"Counter Machine", price:15998, category:"computer", image:"counter.jpg ", desc:"Precise currency counting for business.", affiliate:"https://amzn.to/4aGM4Wl" },
-    { id:7, name:"SanDisk Pen Drive", price:2100, category:"computer", image:" sandisk 1.jpg ", desc:"128GB High speed data transfer.", affiliate:"https://amzn.to/46wnd52" },
-    { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Vlogging special mirrorless camera.", affiliate:"https://amzn.to/4bcVp8l" },
+    { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional 4K Mirrorless Camera.", affiliate:"https://amzn.to/4s8VcbX" },
+    { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Noise cancelling wireless earbuds.", affiliate:"https://amzn.to/3OGT64L" },
+    { id:3, name:"Apple AirPods", price:23990, category:"audio", image:" apple airpods.jpg", desc:"Original Apple spatial audio.", affiliate:"https://amzn.to/3OBvBKx" },
+    { id:4, name:"Charging Cable", price:999, category:"mobile", image:"charge.jpg", desc:"Type-C 100W fast charging.", affiliate:"https://amzn.to/4rFiTsz" },
+    { id:5, name:"HP Laptop", price:68990, category:"laptop", image:"hp laptop.jpg", desc:"High performance laptop.", affiliate:"https://amzn.to/4aI8Q04" },
+    { id:6, name:"Counter Machine", price:15998, category:"office", image:"counter.jpg ", desc:"Precise currency counting.", affiliate:"https://amzn.to/4aGM4Wl" },
+    { id:7, name:"SanDisk Pen Drive", price:2100, category:"storage", image:" sandisk 1.jpg ", desc:"128GB High speed transfer.", affiliate:"https://amzn.to/46wnd52" },
+    { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Vlogging special camera.", affiliate:"https://amzn.to/4bcVp8l" },
     { id:9, name:"boAt Nirvana Crown", price:2799, category:"audio", image:"boats airbords.jpg", desc:"Premium ANC headphones.", affiliate:"https://amzn.to/400HZ9m" },
-    { id:10, name:"Amazfit Active Max", price:15999, category:"watch", image:"smart watch.jpg", desc:"GPS tracking and AMOLED display.", affiliate:"https://amzn.to/4cmxWms" },
-    { id:11, name:"KENT RO Purifier", price:22200, category:"smart", image:"A.jpg ", desc:"Clean water with 6-stage purification.", affiliate:"https://amzn.to/4ckumJx" },
-    { id:12, name:"Samsung Smart Monitor", price:32999, category:"computer", image:"B.jpg ", desc:"High resolution smart display.", affiliate:"https://amzn.to/3P9GCTl" },
-    { id:13, name:"Noise Pro 6R", price:6999, category:"watch", image:" c.jpg ", desc:"Sports smart watch with calling.", affiliate:"https://amzn.to/3P914nm" },
-    { id:14, name:"GUESS Luxury Watch", price:16995, category:"watch", image:"d.jpg", desc:"Designer watch for men.", affiliate:"https://amzn.to/4saLOEW" },
-    { id:15, name:"Antique Wall Clock", price:699, category:"smart", image:"e.jpg ", desc:"Decorative wall clock for home.", affiliate:"https://amzn.to/4u52MGn" },
-    { id:16, name:"Fire Boltt Gaming TWS", price:799, category:"audio", image:"f.jpg", desc:"Ultra low latency gaming buds.", affiliate:"https://amzn.to/4tXBtxH" },
+    { id:10, name:"Amazfit Active Max", price:15999, category:"watch", image:"smart watch.jpg", desc:"GPS and AMOLED display.", affiliate:"https://amzn.to/4cmxWms" },
+    { id:11, name:"KENT RO Purifier", price:22200, category:"kitchen", image:"A.jpg ", desc:"6-stage purification.", affiliate:"https://amzn.to/4ckumJx" },
+    { id:12, name:"Samsung Smart Monitor", price:32999, category:"computer", image:"B.jpg ", desc:"High resolution display.", affiliate:"https://amzn.to/3P9GCTl" },
+    { id:13, name:"Noise Pro 6R", price:6999, category:"watch", image:" c.jpg ", desc:"Sports watch with calling.", affiliate:"https://amzn.to/3P914nm" },
+    { id:14, name:"GUESS Luxury Watch", price:16995, category:"fashion", image:"d.jpg", desc:"Designer watch for men.", affiliate:"https://amzn.to/4saLOEW" },
+    { id:15, name:"Antique Wall Clock", price:699, category:"smart", image:"e.jpg ", desc:"Decorative wall clock.", affiliate:"https://amzn.to/4u52MGn" },
+    { id:16, name:"Fire Boltt Gaming TWS", price:799, category:"gaming", image:"f.jpg", desc:"Ultra low latency buds.", affiliate:"https://amzn.to/4tXBtxH" },
     { id:17, name:"Metal Laptop Stand", price:497, category:"laptop", image:" g.jpg ", desc:"Ergonomic foldable stand.", affiliate:"https://amzn.to/3OFZycl" },
     { id:18, name:"Sony Alpha 6100", price:72499, category:"camera", image:"aa.jpg", desc:"Advanced autofocus camera.", affiliate:"https://amzn.to/40EuCvG" },
     { id:19, name:"IZI Pocket Gimbal", price:24499, category:"camera", image:"aaa.jpg ", desc:"Handheld stabilizer camera.", affiliate:"https://amzn.to/4rMp7qQ" }
 ];
 
+let filteredProducts = [...products];
 let currentPage = 1;
 const pPerPage = 8;
-let recentlyViewed = JSON.parse(localStorage.getItem('recent')) || [];
-let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
-function showStore() {
-    document.getElementById('main-store').style.display = 'block';
-    document.getElementById('single-product-page').style.display = 'none';
-    window.scrollTo(0,0);
+function updateFilters() {
+    const sTerm = document.getElementById('searchInput').value.toLowerCase();
+    const cat = document.getElementById('catFilter').value;
+    const priceRange = document.getElementById('priceFilter').value;
+
+    filteredProducts = products.filter(p => {
+        const matchesSearch = p.name.toLowerCase().includes(sTerm);
+        const matchesCat = (cat === 'all' || p.category === cat);
+        
+        let matchesPrice = true;
+        if (priceRange !== 'all') {
+            const [min, max] = priceRange.split('-').map(Number);
+            if (priceRange === '15000plus') {
+                matchesPrice = p.price >= 15000;
+            } else {
+                matchesPrice = p.price >= min && p.price <= max;
+            }
+        }
+        
+        return matchesSearch && matchesCat && matchesPrice;
+    });
+
+    currentPage = 1;
+    renderGrid();
+}
+
+function renderGrid() {
+    const container = document.getElementById('products-container');
+    container.innerHTML = "";
+    
+    const start = (currentPage - 1) * pPerPage;
+    const paginated = filteredProducts.slice(start, start + pPerPage);
+
+    if(paginated.length === 0) {
+        container.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>या फिल्टरमध्ये प्रोडक्ट्स नाहीत.</p>";
+    }
+
+    paginated.forEach(p => {
+        container.innerHTML += `
+            <div class="card" onclick="openProduct(${p.id})">
+                <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/150'">
+                <h3>${p.name}</h3>
+                <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
+                <button class="view-btn">View Details</button>
+            </div>
+        `;
+    });
+
+    document.getElementById('pageInfo').innerText = `Page ${currentPage}`;
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = (start + pPerPage) >= filteredProducts.length;
 }
 
 function openProduct(id) {
     const p = products.find(x => x.id === id);
-    if(!p) return;
-
-    // Save to Recently Viewed
-    if(!recentlyViewed.includes(id)) {
-        recentlyViewed.unshift(id);
-        if(recentlyViewed.length > 6) recentlyViewed.pop();
-        localStorage.setItem('recent', JSON.stringify(recentlyViewed));
-    }
-
-    // Analytics
-    gtag('event', 'view_item', { 'item_name': p.name });
-
     document.getElementById('main-store').style.display = 'none';
-    const page = document.getElementById('single-product-page');
-    page.style.display = 'block';
-
-    const stock = Math.floor(Math.random() * 8) + 2; // Urgency
-
+    document.getElementById('single-product-page').style.display = 'block';
+    
     document.getElementById('product-content').innerHTML = `
-        <div class="product-layout">
-            <div class="product-image-box">
-                <img src="${p.image}" alt="${p.name}">
-            </div>
-            <div class="product-info-box">
-                <h1>${p.name}</h1>
-                <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
-                <p class="urgency">🔥 Only ${stock} items left in stock - order soon.</p>
-                <hr>
-                <p><strong>About this item:</strong><br>${p.desc}</p>
-                <a href="${p.affiliate}" target="_blank" class="btn btn-amazon" onclick="gtag('event', 'click_amazon', {'name': '${p.name}'})">Buy on Amazon</a>
-                <button class="btn btn-wish" onclick="toggleWish(${p.id})">❤ Add to Wishlist</button>
-            </div>
+        <div style="text-align:center;">
+            <img src="${p.image}" style="max-width:100%; max-height:300px; object-fit:contain; border-radius:15px;">
         </div>
+        <h1 style="font-size:1.5rem; margin:15px 0;">${p.name}</h1>
+        <p class="price" style="font-size:2rem;">₹${p.price.toLocaleString('en-IN')}</p>
+        <div style="background:#f8fafc; padding:15px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:20px;">
+            <p><strong>Description:</strong> ${p.desc}</p>
+        </div>
+        <a href="${p.affiliate}" target="_blank" class="btn btn-amazon">Buy on Amazon</a>
     `;
-
-    // Related Products
-    const related = products.filter(x => x.category === p.category && x.id !== p.id).slice(0, 4);
-    document.getElementById('related-container').innerHTML = related.map(r => `
-        <div class="related-card" onclick="openProduct(${r.id})">
-            <img src="${r.image}">
-            <p style="font-size:12px; margin:5px 0;">₹${r.price.toLocaleString('en-IN')}</p>
-        </div>
-    `).join('');
-
     window.scrollTo(0,0);
 }
 
-function displayMain() {
-    const start = (currentPage - 1) * pPerPage;
-    const paginated = products.slice(start, start + pPerPage);
-    
-    document.getElementById('products-container').innerHTML = paginated.map(p => `
-        <div class="card" onclick="openProduct(${p.id})">
-            <img src="${p.image}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
-            <p style="color:blue; font-size:12px;">View Details</p>
-        </div>
-    `).join('');
-
-    document.getElementById('pageInfo').innerText = `Page ${currentPage}`;
-    document.getElementById('prevBtn').disabled = currentPage === 1;
-    document.getElementById('nextBtn').disabled = start + pPerPage >= products.length;
-
-    // Load Recently Viewed on main page
-    const recentItems = products.filter(x => recentlyViewed.includes(x.id));
-    document.getElementById('recent-container').innerHTML = recentItems.map(r => `
-        <div class="related-card" onclick="openProduct(${r.id})">
-            <img src="${r.image}">
-            <p style="font-size:11px;">${r.name.substring(0,15)}...</p>
-        </div>
-    `).join('');
+function showStore() {
+    document.getElementById('main-store').style.display = 'block';
+    document.getElementById('single-product-page').style.display = 'none';
 }
 
 function changePage(step) {
     currentPage += step;
-    displayMain();
+    renderGrid();
     window.scrollTo(0,0);
 }
 
-function toggleWish(id) {
-    if(!wishlist.includes(id)) {
-        wishlist.push(id);
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        alert("Product added to wishlist! ❤️");
-    } else {
-        alert("Already in wishlist!");
-    }
-}
-
-// Start
-displayMain();
+renderGrid();
 </script>
-
 </body>
 </html>
