@@ -1,237 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS Digital Store | Best Tech Deals</title>
-    
-    <style>
-        :root { --primary: #facc15; --amazon: #ff9900; --dark: #0f172a; --light: #f8fafc; --red: #e11d48; }
-        body { font-family: 'Inter', sans-serif; margin:0; background: var(--light); color: #1e293b; line-height: 1.5; }
-        header { background: var(--dark); color:white; padding:15px; text-align:center; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--primary); }
-        header h1 { margin: 0; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+<meta charset="UTF-8">
+<title>MS Digital Store | Trusted Amazon Deals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .container { width:95%; max-width:1200px; margin:10px auto; }
-        
-        /* Filters Section */
-        .filter-section { background: white; padding: 15px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .search-box { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; font-size: 16px; outline: none; transition: 0.3s; }
-        .search-box:focus { border-color: var(--primary); }
-        .filter-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        select { padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; background: #fff; outline: none; cursor: pointer; }
+<style>
+:root { --primary: #facc15; --dark: #0f172a; --light: #f3f4f6; }
+body{ font-family: 'Segoe UI', Arial, sans-serif; margin:0; background: var(--light); color: #333; }
 
-        /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        
-        @media (min-width: 768px) {
-            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        }
+header{ background: var(--dark); color:white; padding:30px 20px; text-align:center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+header h1 { margin: 0; font-size: 2.5rem; color: var(--primary); }
 
-        .card { background:white; padding:10px; border-radius:12px; border: 1px solid #eee; cursor: pointer; text-align:center; transition: 0.3s; position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        
-        /* Hot Deal Badge */
-        .badge { position: absolute; top: 5px; left: 5px; background: var(--red); color: white; font-size: 10px; padding: 3px 7px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+/* Navigation Tab */
+nav { background: #111827; text-align: center; padding: 10px; position: sticky; top: 0; z-index: 100; }
+nav button { background: none; border: none; color: white; padding: 10px 20px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; }
+nav button.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
 
-        .card img { width: 100%; height: 130px; object-fit: contain; margin-bottom: 8px; }
-        .card h3 { font-size: 0.85rem; margin: 5px 0; height: 32px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #1e293b; }
-        .price { font-size: 1.1rem; font-weight: 800; color: #b91c1c; margin-bottom: 5px; }
-        .view-btn { background: var(--dark); border: none; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: bold; color: white; width: 100%; }
-        
-        /* Urgency Text */
-        .urgency-small { font-size: 10px; color: var(--red); font-weight: bold; margin-bottom: 5px; animation: blink 1.5s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+.container{ width:95%; max-width:1200px; margin:30px auto; }
 
-        /* Detail Page */
-        #single-product-page { display:none; background:white; min-height:100vh; padding:20px; animation: slideIn 0.3s ease-out; }
-        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        
-        .btn { padding: 15px; border-radius: 10px; border:none; cursor:pointer; font-weight:bold; width: 100%; display: block; text-align: center; text-decoration: none; transition: 0.3s; }
-        .btn-amazon { background: var(--amazon); color: white; margin-top: 15px; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3); }
-        .btn-amazon:hover { background: #e68a00; }
-        .btn-back { background: #f1f5f9; color: #1e293b; width: auto; margin-bottom: 20px; display: inline-block; padding: 8px 15px; border: 1px solid #ddd; }
-        
-        .urgency-msg { background: #fff1f2; color: #b91c1c; padding: 10px; border-radius: 8px; border: 1px dashed #fb7185; margin: 15px 0; font-weight: bold; font-size: 13px; text-align: center; }
+.controls {
+    background: white; padding: 20px; border-radius: 12px; 
+    display: flex; gap: 15px; flex-wrap: wrap; 
+    margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    justify-content: center; align-items: center;
+}
+input, select, button.filter-btn { padding:12px; border-radius:8px; border:1px solid #ddd; outline: none; }
+button.filter-btn { background: var(--primary); color: black; font-weight: bold; cursor: pointer; border: none; }
 
-        .pagination { text-align: center; margin: 30px 0; display: flex; justify-content: center; align-items: center; gap: 15px; }
-        .page-btn { padding: 10px 20px; background: var(--dark); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .page-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
-    </style>
+.product-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+.card{ background:white; padding:15px; border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.05); cursor:pointer; transition:0.3s; text-align: center; display: flex; flex-direction: column; height: 100%; justify-content: space-between;}
+.card:hover{ transform:translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.card img{ width:100%; height: 200px; object-fit: contain; border-radius:10px; margin-bottom: 15px; background: #eee;}
+.card h3 { font-size: 1.1rem; margin: 10px 0; min-height: 45px; }
+.price{ font-size: 1.3rem; font-weight:bold; color: var(--dark); margin-bottom: 10px; }
+
+.load-more-container { text-align: center; margin-top: 40px; }
+.load-more-btn { background: var(--dark); color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }
+.load-more-btn:hover { background: #1e293b; }
+
+.modal{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 1000; overflow-y: auto; }
+.modal-content{ background:white; width:90%; max-width:700px; margin:40px auto; padding:30px; border-radius:15px; position:relative; text-align: center; }
+.close{ position:absolute; right:20px; top:15px; font-size:30px; cursor:pointer; color: #666; }
+.btn-buy{ display:inline-block; padding:15px 30px; background: #232f3e; color:white; text-decoration:none; border-radius:8px; margin-top:20px; font-weight:bold; }
+
+footer{ background: var(--dark); color:white; text-align:center; padding:30px; margin-top:50px; }
+</style>
 </head>
+
 <body>
 
-<div id="main-store">
-    <header><h1>MS DIGITAL STORE</h1></header>
-    
-    <div class="container">
-        <div class="filter-section">
-            <input type="text" id="searchInput" class="search-box" placeholder="What are you looking for today?..." oninput="updateFilters()">
-            
-            <div class="filter-controls">
-                <select id="catFilter" onchange="updateFilters()">
-                    <option value="all">All Categories</option>
-                    <option value="camera">Cameras</option>
-                    <option value="audio">Audio & Buds</option>
-                    <option value="laptop">Laptops</option>
-                    <option value="watch">Smart Watches</option>
-                    <option value="computer">Computer Acc.</option>
-                    <option value="mobile">Mobile Acc.</option>
-                    <option value="gaming">Gaming Gear</option>
-                    <option value="storage">Storage/SSD</option>
-                    <option value="smart">Smart Home</option>
-                    <option value="office">Office Tech</option>
-                    <option value="tv">TV & Video</option>
-                    <option value="tablet">Tablets</option>
-                    <option value="networking">Routers/Wi-Fi</option>
-                    <option value="power">Power Banks</option>
-                    <option value="kitchen">Smart Kitchen</option>
-                    <option value="fashion">Tech Fashion</option>
-                </select>
+<header>
+    <h1>MS Digital Store</h1>
+    <p>Handpicked Digital Products | Secure Amazon Checkout</p>
+</header>
 
-                <select id="priceFilter" onchange="updateFilters()">
-                    <option value="all">All Prices</option>
-                    <option value="199-399">₹199 - ₹399</option>
-                    <option value="399-599">₹399 - ₹599</option>
-                    <option value="599-899">₹599 - ₹899</option>
-                    <option value="899-1000">₹899 - ₹1000</option>
-                    <option value="1000-4000">₹1000 - ₹4000</option>
-                    <option value="5000-15000">₹5000 - ₹15000</option>
-                    <option value="15000plus">Above ₹15,000</option>
-                </select>
-            </div>
-        </div>
+<nav>
+    <button id="featuredTab" class="active" onclick="changeTab('featured')">Featured Deals</button>
+    <button id="allTab" onclick="changeTab('all')">All Products</button>
+</nav>
 
-        <div class="product-grid" id="products-container"></div>
+<div class="container">
+    <div class="controls" id="filterSection">
+        <input type="text" id="searchInput" placeholder="Search product name..." onkeyup="filterProducts()">
         
-        <div class="pagination">
-            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
-            <span id="pageInfo">Page 1</span>
-            <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
-        </div>
+        <select id="categoryFilter" onchange="filterProducts()">
+            <option value="">All Categories</option>
+            <option value="camera">Camera</option>
+            <option value="audio">Audio</option>
+            <option value="accessories">Accessories</option>
+            <option value="laptop">Laptop</option>
+            <option value="computer">Computer Items</option>
+            <option value="smart watches">Smart Watches</option>
+            <option value="mobile">Mobile Phones</option>
+            <option value="gaming">Gaming Gear</option>
+            <option value="storage">Storage Devices</option>
+            <option value="home appliances">Home Appliances</option>
+            <option value="smart device">Smart Devices</option>
+            <option value="tablets">Tablets</option>
+            <option value="monitors">Monitors</option>
+            <option value="networking">Networking</option>
+            <option value="vlogging">Vlogging Kit</option>
+        </select>
+
+        <select id="priceFilter" onchange="filterProducts()">
+            <option value="">All Price Range</option>
+            <option value="199-399">₹199 - ₹399</option>  
+            <option value="399-599">₹399 - ₹599</option>  
+            <option value="599-899">₹599 - ₹899</option>  
+            <option value="899-1000">₹899 - ₹1000</option>  
+            <option value="1000-4000">₹1000 - ₹4000</option>  
+            <option value="5000-15000">₹5000 - ₹15000</option>  
+            <option value="15000plus">Above ₹15,000</option> 
+        </select>
+
+        <button class="filter-btn" onclick="filterProducts()">Filter</button>
+    </div>
+
+    <div class="product-grid" id="products"></div>
+
+    <div class="load-more-container" id="loadMoreDiv" style="display: none;">
+        <button class="load-more-btn" onclick="loadAllProducts()">View All Unlimited Products</button>
     </div>
 </div>
 
-<div id="single-product-page" class="container">
-    <button class="btn btn-back" onclick="showStore()">← Back to Shop</button>
-    <div id="product-content"></div>
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <div id="modalData"></div>
+    </div>
 </div>
+
+<footer>
+    <p>&copy; 2026 MS Digital Store. As an Amazon Associate, we earn from qualifying purchases.</p>
+</footer>
 
 <script>
 const products = [
-    { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional 4K Mirrorless Camera. Capture moments in high resolution.", affiliate:"https://amzn.to/4s8VcbX" },
-    { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Noise cancelling wireless earbuds. 50 hours of battery life.", affiliate:"https://amzn.to/3OGT64L" },
-    { id:3, name:"Apple AirPods", price:23990, category:"audio", image:" apple airpods.jpg", desc:"Premium sound quality with Spatial Audio experience.", affiliate:"https://amzn.to/3OBvBKx" },
-    { id:4, name:"Charging Cable", price:999, category:"mobile", image:"charge.jpg", desc:"Ultra-fast charging Type-C cable. Durable and strong.", affiliate:"https://amzn.to/4rFiTsz" },
-    { id:5, name:"HP Laptop", price:68990, category:"laptop", image:"hp laptop.jpg", desc:"High performance laptop for gaming and office work.", affiliate:"https://amzn.to/4aI8Q04" },
-    { id:6, name:"Counter Machine", price:15998, category:"office", image:"counter.jpg ", desc:"High speed currency counting with UV detection.", affiliate:"https://amzn.to/4aGM4Wl" },
-    { id:7, name:"SanDisk Pen Drive", price:2100, category:"storage", image:" sandisk 1.jpg ", desc:"High-speed 128GB flash drive for easy storage.", affiliate:"https://amzn.to/46wnd52" },
-    { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Compact vlogging camera for content creators.", affiliate:"https://amzn.to/4bcVp8l" },
-    { id:9, name:"boAt Nirvana Crown", price:2799, category:"audio", image:"boats airbords.jpg", desc:"Spatial audio headphones with 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" },
-    { id:10, name:"Amazfit Active Max", price:15999, category:"watch", image:"smart watch.jpg", desc:"Smartwatch with GPS, AMOLED and 25-day battery.", affiliate:"https://amzn.to/4cmxWms" },
-    { id:11, name:"KENT RO Purifier", price:22200, category:"kitchen", image:"A.jpg ", desc:"RO + UV + UF water purification for pure health.", affiliate:"https://amzn.to/4ckumJx" },
-    { id:12, name:"Samsung Smart Monitor", price:32999, category:"computer", image:"B.jpg ", desc:"Streaming, gaming and work on one 4K display.", affiliate:"https://amzn.to/3P9GCTl" },
-    { id:13, name:"Noise Pro 6R", price:6999, category:"watch", image:" c.jpg ", desc:"Sports watch with AI coach and calling feature.", affiliate:"https://amzn.to/3P914nm" },
-    { id:14, name:"GUESS Luxury Watch", price:16995, category:"fashion", image:"d.jpg", desc:"Stylish premium designer watch for men.", affiliate:"https://amzn.to/4saLOEW" },
-    { id:15, name:"Antique Wall Clock", price:699, category:"smart", image:"e.jpg ", desc:"Silent vintage wall clock for home decor.", affiliate:"https://amzn.to/4u52MGn" },
-    { id:16, name:"Fire Boltt Gaming TWS", price:799, category:"gaming", image:"f.jpg", desc:"Super low latency earbuds for gaming.", affiliate:"https://amzn.to/4tXBtxH" },
-    { id:17, name:"Metal Laptop Stand", price:497, category:"laptop", image:" g.jpg ", desc:"Foldable ergonomic stand for all laptops.", affiliate:"https://amzn.to/3OFZycl" },
-    { id:18, name:"Sony Alpha 6100", price:72499, category:"camera", image:"aa.jpg", desc:"Incredible 4K video and fast eye-autofocus.", affiliate:"https://amzn.to/40EuCvG" },
-    { id:19, name:"IZI Pocket Gimbal", price:24499, category:"camera", image:"aaa.jpg ", desc:"Pocket-sized stabilized vlogging camera.", affiliate:"https://amzn.to/4rMp7qQ" }
+    { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional photography camera.", affiliate:"https://amzn.to/4s8VcbX" },
+    { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Hybrid ANC earbuds with 50H playtime.", affiliate:"https://amzn.to/3OGT64L" },
+    { id:3, name:"Apple AirPods", price:23990, category:"audio", image:" apple airpods.jpg", desc:"Premium sound with Active Noise Cancellation.", affiliate:"https://amzn.to/3OBvBKx" },
+    { id:4, name:"Mobile Charging Cable", price:999, category:"accessories", image:"charge.jpg", desc:"Fast charging 140W GaN cable.", affiliate:"https://amzn.to/4rFiTsz" },
+    { id:5, name:" Laptop ", price:68990, category:"laptop", image:"hp laptop.jpg", desc:" HP Smartchoice OmniBook 5 (Previously Pavilion) 50 Tops, AMD Ryzen AI 5 340 (16GB LPDDR5X, 512GB SSD) WUXGA 2K, 16''/40.6cm, Win11, Office24, Silver...", affiliate:"https://amzn.to/4aI8Q04" },
+    { id:6, name:"Counter Machine", price:15998, category:"computer", image:"counter.jpg ", desc:"DOSBERG DB-690 currency counting machine with denomination display and UV, MG, IR, MT, 3D twin sensors. Counts mixed notes, detects counterfeit currency, and shows total value accurately. Ideal for business cash management.", affiliate:"https://amzn.to/4aGM4Wl" },
+    { id:7, name:"Pen Drive ", price:2100, category:"computer", image:" sandisk 1.jpg ", desc:"SanDisk Ultra Dual Drive Luxe 128GB lets you move files between Type-C phones and USB-A laptops at lightning speed up to 400MB/s. Premium metal design with 5-year warranty. Plug in. Transfer. Done.", affiliate:"https://amzn.to/46wnd52" },
+    { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Mirrorless camera for vlogging.", affiliate:"https://amzn.to/4bcVp8l" },
+    { id:9, name:"boAt Nirvana Crown", price:2799, category:"audio", image:"boats airbords.jpg", desc:"Spatial audio & 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" },
+    {
+     id:10,
+     name:" Amazfit Active Max Smart Watch ",
+     price:15999,
+     category:"smart watches",
+     image:"smart watch.jpg",
+     desc:"Amazfit Active Max Smart Watch 1.5 inch AMOLED Display, 25-Day Battery, Offline Maps, GPS, 4GB Storage, 170+ Sport Modes, 5 ATM Water Resistant, Heart Rate & Sleep Tracker.",
+     affiliate:"https://amzn.to/4cmxWms"
+    },
+    {
+ id:11,
+ name:" RO Water Purifier ",
+ price:22200,
+ category:"smart device",
+ image:"A.jpg ",
+ desc:"KENT Sterling Star RO – 6-stage purification (RO+UV+UF+Alkaline+Copper), TDS control, 6L tank, 20 LPH, digital purity display. 4 years free service. Perfect for modular kitchens   ",
+ affiliate:"https://amzn.to/4ckumJx "
+    },
+    {
+ id:12,
+ name:"Smart Monitor",
+ price:32999,
+ category:"computer",
+ image:"B.jpg ",
+ desc:" UltraWide Monitor curved display HDR Hz built-in speakers, adjustable stand, webOS, AirPlay2 & Bluetooth. Sleek white design. ",
+ affiliate:" https://amzn.to/3P9GCTl "
+     },
+    {
+ id:13,
+ name:"Noise Pro",
+ price:6999,
+ category:"smart watches",
+ image:" c.jpg ",
+ desc:" Noise Pro 6R  AMOLED, nits brightness, built-in GPS, AI tracking, Strava support, stainless steel dial, 3ATM water resistant. Smart, stylish, ready for fitness. ",
+ affiliate:" https://amzn.to/3P914nm "
+    },
+    {
+ id:14,
+ name:"GUESS Asset Men’s Watch",
+ price:16995,
+ category:"smart watches",
+ image:"d.jpg",
+ desc:"GUESS Asset Men’s Watch – Elegant round dial, premium finish, water resistant design. A clean, luxury timepiece built for everyday class. ",
+ affiliate:"https://amzn.to/4saLOEW"
+    },
+    {
+ id:15,
+ name:"FUNTEREST",
+ price:699,
+ category:"smart watches",
+ image:"e.jpg ",
+ desc:" Luxury Antique Silent Wall Clock – Elegant metal design, smooth noise-free movement, and a rich vintage finish. A classy statement piece for home or office décor. ",
+ affiliate:" https://amzn.to/4u52MGn"
+     },
+    {
+ id:16,
+ name:"Fire Boltt Aero TWS Earbuds",
+ price:799,
+ category:"smart watches",
+ image:"f.jpg",
+ desc:" Fire-Boltt Aero TWS – Bluetooth earbuds with Custom  low latency for gaming, and fast charging case. Clear calls, touch controls, and IPX4 water resistance in a sleek black design. ",
+ affiliate:"https://amzn.to/4tXBtxH "
+    },
+    {
+ id:17,
+ name:"laptop stand",
+ price:497,
+ category:"laptop",
+ image:" g.jpg ",
+ desc:" BKN® Mini Metal Laptop Stand – Premium folding risers with non-slip base devices. Strong, compact, and designed to add a clean, elevated look to your workspace. ",
+ affiliate:" https://amzn.to/3OFZycl"
+    },
+    {
+ id:18,
+ name:"Sony Alpha ILCE camera",
+ price:72499,
+ category:"camera",
+ image:"aa.jpg",
+ desc:" Sony Alpha ILCE 6100X Mirrorless Camera 24.2MP APS C Sensor Fast Auto Focus Tiltable LCD Includes SELP1650 Power Zoom Lens Ver 2 and SEL55210 Lens Black",
+ affiliate:" https://amzn.to/40EuCvG"
+    },
+    {
+ id:19,
+ name:" IZI IRIS Pocket Gimbal Vlogging Camera ",
+ price:24499,
+ category:"camera",
+ image:"aaa.jpg ",
+ desc:" IZI IRIS Pocket Gimbal Vlogging Camera 4K 60FPS AI Tracking Detachable 3 Axis Stabilizer Dual AMOLED Display 160min Battery Support up to 512GB Storage ",
+ affiliate:"https://amzn.to/4rMp7qQ"
+    }
 ];
 
-let filteredProducts = [...products];
-let currentPage = 1;
-const pPerPage = 8;
 
-function updateFilters() {
-    const sTerm = document.getElementById('searchInput').value.toLowerCase();
-    const cat = document.getElementById('catFilter').value;
-    const priceRange = document.getElementById('priceFilter').value;
+let currentTab = 'featured';
 
-    filteredProducts = products.filter(p => {
-        const matchesSearch = p.name.toLowerCase().includes(sTerm);
-        const matchesCat = (cat === 'all' || p.category === cat);
-        let matchesPrice = true;
-        if (priceRange !== 'all') {
-            if (priceRange === '15000plus') { matchesPrice = p.price >= 15000; } 
-            else {
-                const [min, max] = priceRange.split('-').map(Number);
-                matchesPrice = p.price >= min && p.price <= max;
-            }
-        }
-        return matchesSearch && matchesCat && matchesPrice;
-    });
-    currentPage = 1;
-    renderGrid();
-}
-
-function renderGrid() {
-    const container = document.getElementById('products-container');
+function displayProducts(data) {
+    const container = document.getElementById("products");
     container.innerHTML = "";
-    const start = (currentPage - 1) * pPerPage;
-    const paginated = filteredProducts.slice(start, start + pPerPage);
+    let displayData = (currentTab === 'featured') ? data.slice(0, 8) : data;
 
-    paginated.forEach(p => {
-        const stocks = Math.floor(Math.random() * 5) + 2;
+    displayData.forEach(p => {
         container.innerHTML += `
-            <div class="card" onclick="openProduct(${p.id})">
-                <img src="${p.image}" alt="${p.name}">
-                
-                <h3>${p.name}</h3>
-                <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
-                <button class="view-btn">LIMITED TIME DEAL</button>
-            </div>
-        `;
+        <div class="card" onclick="openProduct(${p.id})">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+            <h3>${p.name}</h3>
+            <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
+            <button style="width:100%; padding:10px; background:#facc15; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">View Details</button>
+        </div>`;
     });
-
-    document.getElementById('pageInfo').innerText = `Page ${currentPage}`;
-    document.getElementById('prevBtn').disabled = currentPage === 1;
-    document.getElementById('nextBtn').disabled = (start + pPerPage) >= filteredProducts.length;
+    document.getElementById("loadMoreDiv").style.display = (currentTab === 'featured' && data.length > 8) ? "block" : "none";
 }
 
-function openProduct(id) {
-    const p = products.find(x => x.id === id);
-    document.getElementById('main-store').style.display = 'none';
-    document.getElementById('single-product-page').style.display = 'block';
-    
+function openProduct(id){
+    const product = products.find(p => p.id === id);
 
-    document.getElementById('product-content').innerHTML = `
-        <div style="text-align:center;">
-            <img src="${p.image}" style="max-width:100%; max-height:300px; object-fit:contain; border-radius:15px;">
+    const related = products.filter(p => 
+        p.category === product.category && p.id !== id
+    ).slice(0,3);
+
+    let relatedHTML = "";
+
+    if(related.length > 0){
+        relatedHTML = `
+        <h3 style="margin-top:30px; border-top:1px solid #ddd; padding-top:15px;">You may also like</h3>
+        <div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
+        ${related.map(r => `
+            <div style="width:120px; cursor:pointer; padding:5px; border:1px solid #eee; border-radius:10px;" onclick="openProduct(${r.id})">
+                <img src="${r.image}" style="width:100%; height:80px; object-fit:contain;">
+                <p style="font-size:11px; margin:5px 0; height:30px; overflow:hidden;">${r.name}</p>
+                <p style="font-size:12px; font-weight:bold; color:#0f172a;">₹${r.price.toLocaleString('en-IN')}</p>
+            </div>
+        `).join("")}
         </div>
-        <h1 style="font-size:1.4rem; margin:15px 0; color:#0f172a;">${p.name}</h1>
-        <p class="price" style="font-size:2rem; margin:5px 0;">₹${p.price.toLocaleString('en-IN')}</p>
-        
-        <div class="urgency-msg">
-            🔥 HIGH DEMAND: ${shoppers} people are viewing this deal right now! <br>
-            🚨 HURRY: Only ${stocksLeft} units remaining!
-        </div>
+        `;
+    }
 
-        <div style="background:#f8fafc; padding:15px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:10px;">
-            <p style="margin:0; font-size:14px; color:#475569;"><strong>Product Overview:</strong><br>${p.desc}</p>
-        </div>
+    document.getElementById("modalData").innerHTML=`
+        <h2 style="color:#0f172a">${product.name}</h2>
+        <img src="${product.image}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" style="max-width:250px; width:100%; border-radius:10px; margin: 20px 0;">
+        <p class="price" style="color:#e44d26; font-size:1.5rem">
+            Price: ₹${product.price.toLocaleString('en-IN')}
+        </p>
+        <p style="padding:15px; background:#f9f9f9; border-radius:10px; font-size:14px; line-height:1.5;">
+            ${product.desc}
+        </p>
+        <a class="btn-buy" href="${product.affiliate}" target="_blank">
+            Check Latest Price on Amazon
+        </a>
 
-        <p style="font-size:12px; color:green; font-weight:bold;">✅ Verified Product • 📦 Fast Delivery Available</p>
-
-        <a href="${p.affiliate}" target="_blank" class="btn btn-amazon">PROCEED TO CHECKOUT</a>
-        
-        <p style="text-align:center; font-size:12px; color:#64748b; margin-top:10px;">Safe & Secure Transaction via Amazon</p>
+        ${relatedHTML}
     `;
-    window.scrollTo(0,0);
+
+    document.getElementById("productModal").style.display="block";
+    document.body.style.overflow = "hidden";
 }
 
-function showStore() {
-    document.getElementById('main-store').style.display = 'block';
-    document.getElementById('single-product-page').style.display = 'none';
+function closeModal(){
+    document.getElementById("productModal").style.display="none";
+    document.body.style.overflow = "auto";
 }
 
-function changePage(step) {
-    currentPage += step;
-    renderGrid();
-    window.scrollTo(0,0);
+function changeTab(tab) {
+    currentTab = tab;
+    document.getElementById("featuredTab").classList.toggle("active", tab === 'featured');
+    document.getElementById("allTab").classList.toggle("active", tab === 'all');
+    displayProducts(products);
 }
 
-renderGrid();
+function loadAllProducts() {
+    changeTab('all');
+}
+
+function filterProducts(){
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const category = document.getElementById("categoryFilter").value.toLowerCase();
+    const priceRange = document.getElementById("priceFilter").value;
+    
+    const filtered = products.filter(p => {
+        const matchesName = p.name.toLowerCase().includes(searchTerm);
+        const matchesCategory = (category === "" || p.category.toLowerCase().includes(category));
+        
+        let matchesPrice = true;
+        if (priceRange === "199-399") matchesPrice = (p.price >= 199 && p.price <= 399);
+        else if (priceRange === "399-599") matchesPrice = (p.price >= 399 && p.price <= 599);
+        else if (priceRange === "599-899") matchesPrice = (p.price >= 599 && p.price <= 899);
+        else if (priceRange === "899-1000") matchesPrice = (p.price >= 899 && p.price <= 1000);
+        else if (priceRange === "1000-4000") matchesPrice = (p.price >= 1000 && p.price <= 4000);
+        else if (priceRange === "5000-15000") matchesPrice = (p.price >= 5000 && p.price <= 15000);
+        else if (priceRange === "15000plus") matchesPrice = (p.price > 15000);
+
+        return matchesName && matchesCategory && matchesPrice;
+    });
+    
+    displayProducts(filtered);
+}
+
+displayProducts(products);
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById("productModal")) closeModal();
+}
 </script>
+
 </body>
     </html>
+    
