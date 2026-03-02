@@ -165,44 +165,35 @@ function updateFilters() {
     renderGrid();
 }
 
- {function openProduct(id) {
+function renderGrid() {
+    const container = document.getElementById('products-container');
+    container.innerHTML = "";
+    const start = (currentPage - 1) * pPerPage;
+    const paginated = filteredProducts.slice(start, start + pPerPage);
+
+    paginated.forEach(p => {
+        const stocks = Math.floor(Math.random() * 5) + 2;
+        container.innerHTML += `
+            <div class="card" onclick="openProduct(${p.id})">
+                <img src="${p.image}" alt="${p.name}">
+                <p class="urgency-small">⚡ Only ${stocks} Left in Stock!</p>
+                <h3>${p.name}</h3>
+                <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
+                <button class="view-btn">LIMITED TIME DEAL</button>
+            </div>
+        `;
+    });
+
+    document.getElementById('pageInfo').innerText = `Page ${currentPage}`;
+    document.getElementById('prevBtn').disabled = currentPage === 1;
+    document.getElementById('nextBtn').disabled = (start + pPerPage) >= filteredProducts.length;
+}
+
+function openProduct(id) {
     const p = products.find(x => x.id === id);
-
-    // 🔹 Related products logic (same category, exclude current)
-    const related = products
-        .filter(x => x.category === p.category && x.id !== p.id)
-        .slice(0, 4);
-
     document.getElementById('main-store').style.display = 'none';
     document.getElementById('single-product-page').style.display = 'block';
     
-    const shoppers = Math.floor(Math.random() * 50) + 120;
-    const stocksLeft = Math.floor(Math.random() * 6) + 2;
-
-    // 🔹 Related Products HTML
-    let relatedHTML = "";
-    if (related.length > 0) {
-        relatedHTML = `
-            <div style="margin-top:40px;">
-                <h3 style="margin-bottom:15px;">You May Also Like</h3>
-                <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px;">
-                    ${related.map(r => `
-                        <div onclick="openProduct(${r.id})" 
-                             style="border:1px solid #e2e8f0; padding:10px; border-radius:10px; text-align:center; cursor:pointer;">
-                            <img src="${r.image}" 
-                                 style="width:80px; height:80px; object-fit:contain;">
-                            <p style="font-size:12px; font-weight:bold; margin:8px 0;">
-                                ${r.name}
-                            </p>
-                            <p style="color:#b91c1c; font-weight:800; font-size:13px;">
-                                ₹${r.price.toLocaleString('en-IN')}
-                            </p>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
 
     document.getElementById('product-content').innerHTML = `
         <div style="text-align:center;">
@@ -217,28 +208,18 @@ function updateFilters() {
         </div>
 
         <div style="background:#f8fafc; padding:15px; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:10px;">
-            <p style="margin:0; font-size:14px; color:#475569;">
-                <strong>Product Overview:</strong><br>${p.desc}
-            </p>
+            <p style="margin:0; font-size:14px; color:#475569;"><strong>Product Overview:</strong><br>${p.desc}</p>
         </div>
 
-        <p style="font-size:12px; color:green; font-weight:bold;">
-            ✅ Verified Product • 📦 Fast Delivery Available
-        </p>
+        <p style="font-size:12px; color:green; font-weight:bold;">✅ Verified Product • 📦 Fast Delivery Available</p>
 
-        <a href="${p.affiliate}" target="_blank" class="btn btn-amazon">
-            PROCEED TO CHECKOUT
-        </a>
-
-        <p style="text-align:center; font-size:12px; color:#64748b; margin-top:10px;">
-            Safe & Secure Transaction via Amazon
-        </p>
-
-        ${relatedHTML}
+        <a href="${p.affiliate}" target="_blank" class="btn btn-amazon">PROCEED TO CHECKOUT</a>
+        
+        <p style="text-align:center; font-size:12px; color:#64748b; margin-top:10px;">Safe & Secure Transaction via Amazon</p>
     `;
-
     window.scrollTo(0,0);
-    }
+}
+
 function showStore() {
     document.getElementById('main-store').style.display = 'block';
     document.getElementById('single-product-page').style.display = 'none';
@@ -254,4 +235,3 @@ renderGrid();
 </script>
 </body>
 </html>
-
