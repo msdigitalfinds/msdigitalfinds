@@ -176,7 +176,7 @@ function renderGrid() {
         container.innerHTML += `
             <div class="card" onclick="openProduct(${p.id})">
                 <img src="${p.image}" alt="${p.name}">
-                <p class="urgency-small">⚡ Only ${stocks} Left in Stock!</p>
+                
                 <h3>${p.name}</h3>
                 <p class="price">₹${p.price.toLocaleString('en-IN')}</p>
                 <button class="view-btn">LIMITED TIME DEAL</button>
@@ -234,4 +234,4 @@ function changePage(step) {
 renderGrid();
 </script>
 </body>
-</html>
+    </html>
