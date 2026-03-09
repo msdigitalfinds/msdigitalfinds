@@ -12,7 +12,6 @@ body{ font-family: 'Segoe UI', Arial, sans-serif; margin:0; background: var(--li
 header{ background: var(--dark); color:white; padding:30px 20px; text-align:center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 header h1 { margin: 0; font-size: 2.5rem; color: var(--primary); }
 
-/* Navigation Tab */
 nav { background: #111827; text-align: center; padding: 10px; position: sticky; top: 0; z-index: 100; }
 nav button { background: none; border: none; color: white; padding: 10px 20px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: 0.3s; }
 nav button.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
@@ -33,11 +32,9 @@ button.filter-btn { background: var(--primary); color: black; font-weight: bold;
 .card:hover{ transform:translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 .card img{ width:100%; height: 200px; object-fit: contain; border-radius:10px; margin-bottom: 15px; background: #eee;}
 .card h3 { font-size: 1.1rem; margin: 10px 0; min-height: 45px; }
-.price{ font-size: 1.3rem; font-weight:bold; color: var(--dark); margin-bottom: 10px; }
 
 .load-more-container { text-align: center; margin-top: 40px; }
 .load-more-btn { background: var(--dark); color: white; padding: 15px 40px; border: none; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; }
-.load-more-btn:hover { background: #1e293b; }
 
 .modal{ display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index: 1000; overflow-y: auto; }
 .modal-content{ background:white; width:90%; max-width:700px; margin:40px auto; padding:30px; border-radius:15px; position:relative; text-align: center; }
@@ -61,9 +58,8 @@ footer{ background: var(--dark); color:white; text-align:center; padding:30px; m
 </nav>
 
 <div class="container">
-    <div class="controls" id="filterSection">
+    <div class="controls">
         <input type="text" id="searchInput" placeholder="Search product name..." onkeyup="filterProducts()">
-        
         <select id="categoryFilter" onchange="filterProducts()">
             <option value="">All Categories</option>
             <option value="camera">Camera</option>
@@ -82,14 +78,13 @@ footer{ background: var(--dark); color:white; text-align:center; padding:30px; m
             <option value="networking">Networking</option>
             <option value="vlogging">Vlogging Kit</option>
         </select>
-
         <button class="filter-btn" onclick="filterProducts()">Filter</button>
     </div>
 
     <div class="product-grid" id="products"></div>
 
     <div class="load-more-container" id="loadMoreDiv" style="display: none;">
-        <button class="load-more-btn" onclick="loadAllProducts()">View All Unlimited Products</button>
+        <button class="load-more-btn" onclick="changeTab('all')">View All Unlimited Products</button>
     </div>
 </div>
 
@@ -111,157 +106,42 @@ const products = [
     { id:3, name:"Apple AirPods", category:"audio", image:" apple airpods.jpg", desc:"Premium sound with Active Noise Cancellation.", affiliate:"https://amzn.to/3OBvBKx" },
     { id:4, name:"Mobile Charging Cable",  category:"accessories", image:"charge.jpg", desc:"Fast charging 140W GaN cable.", affiliate:"https://amzn.to/4rFiTsz" },
     { id:5, name:" Laptop ",  category:"laptop", image:"hp laptop.jpg", desc:" HP Smartchoice OmniBook 5 (Previously Pavilion) 50 Tops, AMD Ryzen AI 5 340 (16GB LPDDR5X, 512GB SSD) WUXGA 2K, 16''/40.6cm, Win11, Office24, Silver...", affiliate:"https://amzn.to/4aI8Q04" },
-    { id:6, name:"Counter Machine", category:"computer", image:"counter.jpg ", desc:"DOSBERG DB-690 currency counting machine with denomination display and UV, MG, IR, MT, 3D twin sensors. Counts mixed notes, detects counterfeit currency, and shows total value accurately. Ideal for business cash management.", affiliate:"https://amzn.to/4aGM4Wl" },
-    { id:7, name:"Pen Drive ",  category:"computer", image:" sandisk 1.jpg ", desc:"SanDisk Ultra Dual Drive Luxe 128GB lets you move files between Type-C phones and USB-A laptops at lightning speed up to 400MB/s. Premium metal design with 5-year warranty. Plug in. Transfer. Done.", affiliate:"https://amzn.to/46wnd52" },
+    { id:6, name:"Counter Machine", category:"computer", image:"counter.jpg ", desc:"DOSBERG DB-690 currency counting machine with denomination display and UV, MG, IR, MT, 3D twin sensors.", affiliate:"https://amzn.to/4aGM4Wl" },
+    { id:7, name:"Pen Drive ",  category:"computer", image:" sandisk 1.jpg ", desc:"SanDisk Ultra Dual Drive Luxe 128GB lets you move files between Type-C phones and USB-A laptops.", affiliate:"https://amzn.to/46wnd52" },
     { id:8, name:"Canon EOS R50",  category:"camera", image:" canon.jpg", desc:"Mirrorless camera for vlogging.", affiliate:"https://amzn.to/4bcVp8l" },
     { id:9, name:"boAt Nirvana Crown",  category:"audio", image:"boats airbords.jpg", desc:"Spatial audio & 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" },
-    {
-     id:10,
-     name:" Amazfit Active Max Smart Watch ",
-     category:"smart watches",
-     image:"smart watch.jpg",
-     desc:"Amazfit Active Max Smart Watch 1.5 inch AMOLED Display, 25-Day Battery, Offline Maps, GPS, 4GB Storage, 170+ Sport Modes, 5 ATM Water Resistant, Heart Rate & Sleep Tracker.",
-     affiliate:"https://amzn.to/4cmxWms"
-    },
-    {
- id:11,
- name:" RO Water Purifier ",
- category:"smart device",
- image:"A.jpg ",
- desc:"KENT Sterling Star RO – 6-stage purification (RO+UV+UF+Alkaline+Copper), TDS control, 6L tank, 20 LPH, digital purity display. 4 years free service. Perfect for modular kitchens   ",
- affiliate:"https://amzn.to/4ckumJx "
-    },
-    {
- id:12,
- name:"Smart Monitor",
- category:"computer",
- image:"B.jpg ",
- desc:" UltraWide Monitor curved display HDR Hz built-in speakers, adjustable stand, webOS, AirPlay2 & Bluetooth. Sleek white design. ",
- affiliate:" https://amzn.to/3P9GCTl "
-     },
-    {
- id:13,
- name:"Noise Pro",
- category:"smart watches",
- image:" c.jpg ",
- desc:" Noise Pro 6R  AMOLED, nits brightness, built-in GPS, AI tracking, Strava support, stainless steel dial, 3ATM water resistant. Smart, stylish, ready for fitness. ",
- affiliate:" https://amzn.to/3P914nm "
-    },
-    {
- id:14,
- name:"GUESS Asset Men’s Watch",
- category:"smart watches",
- image:"d.jpg",
- desc:"GUESS Asset Men’s Watch – Elegant round dial, premium finish, water resistant design. A clean, luxury timepiece built for everyday class. ",
- affiliate:"https://amzn.to/4saLOEW"
-    },
-    {
- id:15,
- name:"FUNTEREST",
- category:"smart watches",
- image:"e.jpg ",
- desc:" Luxury Antique Silent Wall Clock – Elegant metal design, smooth noise-free movement, and a rich vintage finish. A classy statement piece for home or office décor. ",
- affiliate:" https://amzn.to/4u52MGn"
-     },
-    {
- id:16,
- name:"Fire Boltt Aero TWS Earbuds",
- category:"smart watches",
- image:"f.jpg",
- desc:" Fire-Boltt Aero TWS – Bluetooth earbuds with Custom  low latency for gaming, and fast charging case. Clear calls, touch controls, and IPX4 water resistance in a sleek black design. ",
- affiliate:"https://amzn.to/4tXBtxH "
-    },
-    {
- id:17,
- name:"laptop stand",
- category:"laptop",
- image:" g.jpg ",
- desc:" BKN® Mini Metal Laptop Stand – Premium folding risers with non-slip base devices. Strong, compact, and designed to add a clean, elevated look to your workspace. ",
- affiliate:" https://amzn.to/3OFZycl"
-    },
-    {
- id:18,
- name:"Sony Alpha ILCE camera",
- category:"camera",
- image:"aa.jpg",
- desc:" Sony Alpha ILCE 6100X Mirrorless Camera 24.2MP APS C Sensor Fast Auto Focus Tiltable LCD Includes SELP1650 Power Zoom Lens Ver 2 and SEL55210 Lens Black",
- affiliate:" https://amzn.to/40EuCvG"
-    },
-    {
- id:19,
- name:" IZI IRIS Pocket Gimbal Vlogging Camera ",
- category:"camera",
- image:"aaa.jpg ",
- desc:" IZI IRIS Pocket Gimbal Vlogging Camera 4K 60FPS AI Tracking Detachable 3 Axis Stabilizer Dual AMOLED Display 160min Battery Support up to 512GB Storage ",
- affiliate:" https://amzn.to/4lfVwDS "
-    },
-    {
- id:20,
- name:"Canon EOS R100 Mirrorless Camera",
- category:"camera",
- image:"abb.jpg ",
- desc:"Canon EOS R100 24.1MP Mirrorless Camera Black with RF S18 45mm F4.5 6.3 IS STM Lens 4K Video ",
- affiliate:"https://amzn.to/4b5YFRP"
-    },
-    {
- id:21,
- name:"SanDisk Extreme 128GB SD Card",
- category:"Storage Devices",
- image:"abc.jpg ",
- desc:"High speed 128GB SD card with up to 180MB read and 90MB write speed. Ideal for 4K video recording and professional photography  ",
- affiliate:"https://amzn.to/4rIcAEF "
-  },
-  {
- id:22,
- name:"ADOFYS 49 in 1 Action Camera Accessories Kit for GoPro Insta360 DJI",
- category:"Accessories",
- image:"zxz.jpg",
- desc:"Universal 49 in 1 accessories bundle compatible with GoPro Hero models SJCAM Insta360 DJI and Xiaomi Yi. Includes mounts straps and essential gear for stable and versatile shooting",
- affiliate:"https://amzn.to/4l3Z1gl "
-    },
-    {
- id:23,
- name:"Sony Alpha ZV E10M2K 26MP Mirrorless Vlog Camera 4K",
- category:"camera",
- image:" zbz.jpg ",
- desc:" 26MP APS C mirrorless camera with 16 50mm power zoom lens and 4K 60p recording. Built for creators with advanced video quality fast autofocus and professional performance. ",
- affiliate:"  https://amzn.to/3OW4rOp "
-    },
-    {
- id:24,
- name:"Noise Master Buds with Bose Sound ANC Bluetooth Earbuds",
- category:"Audio",
- image:"aza.jpg ",
- desc:" Premium in ear Bluetooth earbuds with adaptive ANC up to 49dB LHDC 5.0 and immersive spatial audio. Up to 44 hours playtime with six mic ENC for clear calls and powerful sound  ",
- affiliate:" https://amzn.to/4l7HaFs"
-    },
-    {
- id:25,
- name:"Lemorele 13 in 1 USB C Docking Station 10Gbps Dual 4K",
- category:"Computer Items",
- image:" a4.jpg",
- desc:" High speed 13 in 1 USB C hub with dual 4K HDMI VGA Gigabit RJ45 PD 100W charging and SD MicroSD slots. Ideal for laptops needing full connectivity and powerful expansion  ",
- affiliate:" https://amzn.to/4cqNXrw"
-     },
- { id:26, name:"IZI GO X Lite AI Tracking Smartphone Gimbal Stabilizer",  category:"camera", image:"c1.jpg", desc:"IZI GO X Lite is a smart AI-tracking smartphone stabilizer with automatic rotation and a 420mm telescopic rod. Designed for smooth vlogging, stable videos, and professional content creation", affiliate:"https://amzn.to/4b7FGpQ" },
- { id:27, name:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop Gas Stove", category:"Home Appliances", image:"c2.jpg", desc:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop features auto ignition, digital timer, and flame failure safety for modern kitchens. Built with toughened glass and compatible with LPG & PNG for safe, stylish cooking", affiliate:"https://amzn.to/4lldVz6" },
-    { id:28, name:"Lavie Sport Emperor Anti-Theft Laptop Backpack 24L", category:"Accessories", image:"c3.jpg", desc:"Lavie Sport Emperor Anti-Theft Backpack features a durable premium design with a secure laptop sleeve for up to 15-inch notebooks. Spacious 24L capacity makes it perfect for office, travel, and daily business use", affiliate:"https://amzn.to/4b6aqrs " },
-    { id:29, name:"SanDisk Cruzer Blade 128GB USB Flash Drive", category:"Storage Devices", image:"c4.jpg", desc:" SanDisk Cruzer Blade 128GB USB flash drive offers reliable storage in a compact design, perfect for storing photos, videos, and important files. Easy plug-and-play use with dependable performance and 5-year warranty", affiliate:"https://amzn.to/4l9lo42" },
-    { id:30, name:"Apple USB-C to Lightning Cable 1m",  category:"Accessories", image:"c5.jpg", desc:"Apple USB-C to Lightning Cable delivers fast charging and reliable data transfer for iPhone and iPad. Built with Apple’s premium quality for safe, durable everyday performance ", affiliate:" https://amzn.to/4udH5nK" },
-    { id:31, name:"STRIFF Adjustable Foldable Laptop Stand", category:"Accessories", image:"aa1.jpg", desc:" Portable ventilated laptop stand with adjustable height for better comfort and airflow. Compatible with MacBook laptops notebooks and tablets for work gaming and daily use.", affiliate:" https://amzn.to/3PpyTk9" },
-    { id:32, name:"Amazon Basics Pro Series ANC Wireless Earbuds", category:"Audio", image:"aa2.jpg", desc:" Advanced wireless earbuds with active noise cancellation Bluetooth connectivity and up to 55 hours playtime. Features quad mic ENC and smart touch controls for clear calls and immersive sound.", affiliate:" https://amzn.to/4bvDZ73" },
-    { id:33, name:"Amazon Basics TWS In Ear Earbuds AB T17", category:"Audio", image:"aa3.jpg", desc:"Wireless earbuds with dual 13mm drivers Bluetooth 5.3 and up to 70 hours playtime. Fast charging design with IPX4 water resistance for music gaming and everyday use. ", affiliate:" https://amzn.to/4uAXXFl" },
-    { id:34, name:"Angoo Travel Gadget Organizer Tech Pouch", category:"Accessories", image:"aa4.jpg", desc:" Compact travel tech organizer designed to store cables chargers SSD HDD and power banks safely. Durable design with multiple compartments for neat and secure gadget storage.", affiliate:" https://amzn.to/47kgDik" },
-    { id:35, name:"Portronics Bridge Y USB 3.0 to Type C OTG Adapter", category:"Accessories", image:"aa5.jpg", desc:" High speed OTG adapter with up to 10Gbps data transfer for Type C devices. Compact and durable design ideal for connecting USB drives keyboards and accessories", affiliate:"https://amzn.to/3Nf3IY9 " },
-    { id:36, name:"Portronics Snapcase 3 Fast Charging Cable Kit", category:"Storage Devices", image:"aa6.jpg", desc:" Multifunctional 60W fast charging cable kit with USB A and Type C converters for Micro USB Type C and Lightning devices. Compact design with reliable data transfer and charging support", affiliate:"https://amzn.to/4bikk9C " },
-    { id:37, name:"Lemorele 10 in 1 USB C Hub Multiport Adapter", category:"Storage Devices", image:"aa7.jpg", desc:"Versatile USB C hub with 4K HDMI Gigabit Ethernet 100W PD charging USB ports and SD TF card slots. Designed to expand connectivity for MacBook laptops and modern Type C devices ", affiliate:" https://amzn.to/4sw67g5" },
-    { id:38, name:"SanDisk Ultra Dual Drive USB Type C 256GB OTG Flash Drive", category:"Storage Devices", image:"aa8.jpg", desc:" High speed 256GB dual USB drive with Type C and USB 3.0 connectors for easy file transfer between smartphones tablets and laptops. Compact design with reliable performance", affiliate:" https://amzn.to/4cBPBqm" },
-    { id:39, name:"Noise Origin Smartwatch ApexVision AMOLED Display", category:"Smart Watches", image:"aa9.jpg", desc:" Premium smartwatch with 1.46 inch ApexVision AMOLED display Nebula UI and powerful EN1 processor. Stainless steel design with smooth performance and advanced smart features", affiliate:" https://amzn.to/4liLEcb" },
-    { id:40, name:"GUESS Headline Analog Square Dial Men's Watch", category:"Smart Watches", image:"aa10.jpg", desc:" Stylish men's analog watch featuring a modern square dial and water resistant build. Premium design that blends fashion and everyday durability", affiliate:"https://amzn.to/4rn64lX " }
-
-
+    { id:10, name:" Amazfit Active Max Smart Watch ", category:"smart watches", image:"smart watch.jpg", desc:"1.5 inch AMOLED Display, 25-Day Battery, GPS, 4GB Storage.", affiliate:"https://amzn.to/4cmxWms" },
+    { id:11, name:" RO Water Purifier ", category:"smart device", image:"A.jpg ", desc:"KENT Sterling Star RO – 6-stage purification, TDS control, 6L tank.", affiliate:"https://amzn.to/4ckumJx " },
+    { id:12, name:"Smart Monitor", category:"computer", image:"B.jpg ", desc:" UltraWide Monitor curved display HDR Hz built-in speakers.", affiliate:" https://amzn.to/3P9GCTl " },
+    { id:13, name:"Noise Pro", category:"smart watches", image:" c.jpg ", desc:" Noise Pro 6R AMOLED, built-in GPS, AI tracking.", affiliate:" https://amzn.to/3P914nm " },
+    { id:14, name:"GUESS Asset Men’s Watch", category:"smart watches", image:"d.jpg", desc:"Elegant round dial, premium finish, luxury timepiece.", affiliate:"https://amzn.to/4saLOEW" },
+    { id:15, name:"FUNTEREST", category:"smart watches", image:"e.jpg ", desc:" Luxury Antique Silent Wall Clock – Elegant metal design.", affiliate:" https://amzn.to/4u52MGn" },
+    { id:16, name:"Fire Boltt Aero TWS Earbuds", category:"smart watches", image:"f.jpg", desc:"Bluetooth earbuds with low latency for gaming.", affiliate:"https://amzn.to/4tXBtxH " },
+    { id:17, name:"laptop stand", category:"laptop", image:" g.jpg ", desc:" BKN® Mini Metal Laptop Stand – Premium folding risers.", affiliate:" https://amzn.to/3OFZycl" },
+    { id:18, name:"Sony Alpha ILCE camera", category:"camera", image:"aa.jpg", desc:" 24.2MP APS C Sensor Fast Auto Focus Tiltable LCD.", affiliate:" https://amzn.to/40EuCvG" },
+    { id:19, name:" IZI IRIS Pocket Gimbal Vlogging Camera ", category:"camera", image:"aaa.jpg ", desc:" 4K 60FPS AI Tracking Detachable 3 Axis Stabilizer.", affiliate:" https://amzn.to/4lfVwDS " },
+    { id:20, name:"Canon EOS R100 Mirrorless Camera", category:"camera", image:"abb.jpg ", desc:"24.1MP Mirrorless Camera with RF S18 45mm Lens.", affiliate:"https://amzn.to/4b5YFRP" },
+    { id:21, name:"SanDisk Extreme 128GB SD Card", category:"storage", image:"abc.jpg ", desc:"High speed 128GB SD card with up to 180MB read speed.", affiliate:"https://amzn.to/4rIcAEF " },
+    { id:22, name:"Action Camera Accessories Kit", category:"accessories", image:"zxz.jpg", desc:"Universal 49 in 1 accessories bundle for GoPro/DJI.", affiliate:"https://amzn.to/4l3Z1gl " },
+    { id:23, name:"Sony Alpha ZV E10M2K Mirrorless", category:"camera", image:" zbz.jpg ", desc:" 26MP APS C mirrorless camera with 4K 60p recording. ", affiliate:"  https://amzn.to/3OW4rOp " },
+    { id:24, name:"Noise Master Buds ANC", category:"audio", image:"aza.jpg ", desc:" Premium earbuds with adaptive ANC up to 49dB.", affiliate:" https://amzn.to/4l7HaFs" },
+    { id:25, name:"Lemorele 13 in 1 USB C Docking", category:"computer", image:" a4.jpg", desc:" Dual 4K HDMI VGA Gigabit RJ45 PD 100W hub.", affiliate:" https://amzn.to/4cqNXrw" },
+    { id:26, name:"IZI GO X Lite Gimbal",  category:"camera", image:"c1.jpg", desc:"AI-tracking smartphone stabilizer for smooth vlogs.", affiliate:"https://amzn.to/4b7FGpQ" },
+    { id:27, name:"Dorado 3 Burner Hobtop", category:"home appliances", image:"c2.jpg", desc:"Smart Glass Hobtop Gas Stove with auto ignition.", affiliate:"https://amzn.to/4lldVz6" },
+    { id:28, name:"Lavie Sport Anti-Theft Backpack", category:"accessories", image:"c3.jpg", desc:"24L capacity laptop backpack for office and travel.", affiliate:"https://amzn.to/4b6aqrs " },
+    { id:29, name:"SanDisk Cruzer Blade 128GB", category:"storage", image:"c4.jpg", desc:"Reliable storage in a compact plug-and-play design.", affiliate:"https://amzn.to/4l9lo42" },
+    { id:30, name:"Apple USB-C to Lightning",  category:"accessories", image:"c5.jpg", desc:"Fast charging and reliable data transfer.", affiliate:" https://amzn.to/4udH5nK" },
+    { id:31, name:"STRIFF Laptop Stand", category:"accessories", image:"aa1.jpg", desc:"Adjustable height for better comfort and airflow.", affiliate:" https://amzn.to/3PpyTk9" },
+    { id:32, name:"Amazon Basics Pro ANC", category:"audio", image:"aa2.jpg", desc:"Wireless earbuds with active noise cancellation.", affiliate:" https://amzn.to/4bvDZ73" },
+    { id:33, name:"Amazon Basics TWS AB T17", category:"audio", image:"aa3.jpg", desc:"Bluetooth 5.3 with up to 70 hours playtime.", affiliate:" https://amzn.to/4uAXXFl" },
+    { id:34, name:"Angoo Travel Gadget Organizer", category:"accessories", image:"aa4.jpg", desc:"Compact travel tech organizer for cables and SSD.", affiliate:" https://amzn.to/47kgDik" },
+    { id:35, name:"Portronics Bridge Y OTG", category:"accessories", image:"aa5.jpg", desc:"High speed 10Gbps data transfer adapter.", affiliate:"https://amzn.to/3Nf3IY9 " },
+    { id:36, name:"Portronics Snapcase 3 Kit", category:"storage", image:"aa6.jpg", desc:"Multifunctional 60W fast charging cable kit.", affiliate:"https://amzn.to/4bikk9C " },
+    { id:37, name:"Lemorele 10 in 1 USB C Hub", category:"storage", image:"aa7.jpg", desc:"4K HDMI Gigabit Ethernet 100W PD charging.", affiliate:" https://amzn.to/4sw67g5" },
+    { id:38, name:"SanDisk Ultra Dual 256GB", category:"storage", image:"aa8.jpg", desc:"Dual USB drive for Type C and USB 3.0.", affiliate:" https://amzn.to/4cBPBqm" },
+    { id:39, name:"Noise Origin Smartwatch", category:"smart watches", image:"aa9.jpg", desc:"1.46 inch AMOLED display with Nebula UI.", affiliate:" https://amzn.to/4liLEcb" },
+    { id:40, name:"GUESS Headline Analog Watch", category:"smart watches", image:"aa10.jpg", desc:"Modern square dial and water resistant build.", affiliate:"https://amzn.to/4rn64lX " }
 ];
-
 
 let currentTab = 'featured';
 
@@ -273,112 +153,69 @@ function displayProducts(data) {
     displayData.forEach(p => {
         container.innerHTML += `
         <div class="card" onclick="openProduct(${p.id})">
-            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+            <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300?text=Digital+Product'">
             <h3>${p.name}</h3>
- 
             <button style="width:100%; padding:10px; background:#facc15; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">View Details</button>
         </div>`;
     });
     document.getElementById("loadMoreDiv").style.display = (currentTab === 'featured' && data.length > 8) ? "block" : "none";
 }
 
+function filterProducts() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const category = document.getElementById("categoryFilter").value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm) && (category === "" || p.category.toLowerCase() === category));
+    displayProducts(filtered);
+}
+
 function openProduct(id){
     const product = products.find(p => p.id === id);
-
-    const related = products.filter(p => 
-        p.category === product.category && p.id !== id
-    ).slice(0,3);
-
+    
+    // Related Products Logic (3 products from same category)
+    const related = products.filter(p => p.category === product.category && p.id !== id).slice(0,3);
     let relatedHTML = "";
-
-    if(related.length > 0){
+    if(related.length > 0) {
         relatedHTML = `
         <h3 style="margin-top:30px; border-top:1px solid #ddd; padding-top:15px;">You may also like</h3>
-        <div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
         ${related.map(r => `
             <div style="width:120px; cursor:pointer; padding:5px; border:1px solid #eee; border-radius:10px;" onclick="openProduct(${r.id})">
                 <img src="${r.image}" style="width:100%; height:80px; object-fit:contain;">
                 <p style="font-size:11px; margin:5px 0; height:30px; overflow:hidden;">${r.name}</p>
-                <p style="font-size:12px; font-weight:bold; color:#0f172a;">₹${r.price.toLocaleString('en-IN')}</p>
             </div>
         `).join("")}
-        </div>
-        `;
+        </div>`;
     }
 
     document.getElementById("modalData").innerHTML=`
         <h2 style="color:#0f172a">${product.name}</h2>
-        
-      
-        </p>
-        <a class="btn-buy" href="${product.affiliate}" target="_blank">
-            Check Latest Price on Amazon
-        </a>
-
+        <img src="${product.image}" style="max-width:200px; margin: 20px 0;" onerror="this.src='https://via.placeholder.com/200'">
+        <p style="padding:0 20px; line-height:1.6;">${product.desc}</p>
+        <a class="btn-buy" href="${product.affiliate}" target="_blank">Check Latest Price on Amazon</a>
         ${relatedHTML}
     `;
-
     document.getElementById("productModal").style.display="block";
     document.body.style.overflow = "hidden";
 }
 
-function closeModal(){function closeModal() {
-    document.getElementById("productModal").style.display = "none";
+function closeModal(){
+    document.getElementById("productModal").style.display="none";
+    document.body.style.overflow = "auto";
 }
 
-// Close modal if user clicks outside the box
 window.onclick = function(event) {
     let modal = document.getElementById("productModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-// Initialize the store
-displayProducts(products);
-    
+    if (event.target == modal) { closeModal(); }
 }
 
 function changeTab(tab) {
     currentTab = tab;
-    document.getElementById("featuredTab").classList.toggle("active", tab === 'featured');
-    document.getElementById("allTab").classList.toggle("active", tab === 'all');
+    document.getElementById("featuredTab").classList.toggle('active', tab === 'featured');
+    document.getElementById("allTab").classList.toggle('active', tab === 'all');
     displayProducts(products);
 }
 
-function loadAllProducts() {
-    changeTab('all');
-}
-
-function filterProducts(){
-    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-    const category = document.getElementById("categoryFilter").value.toLowerCase();
-    const priceRange = document.getElementById("priceFilter").value;
-    
-    const filtered = products.filter(p => {
-        const matchesName = p.name.toLowerCase().includes(searchTerm);
-        const matchesCategory = (category === "" || p.category.toLowerCase().includes(category));
-        
-        let matchesPrice = true;
-        if (priceRange === "199-399") matchesPrice = (p.price >= 199 && p.price <= 399);
-        else if (priceRange === "399-599") matchesPrice = (p.price >= 399 && p.price <= 599);
-        else if (priceRange === "599-899") matchesPrice = (p.price >= 599 && p.price <= 899);
-        else if (priceRange === "899-1000") matchesPrice = (p.price >= 899 && p.price <= 1000);
-        else if (priceRange === "1000-4000") matchesPrice = (p.price >= 1000 && p.price <= 4000);
-        else if (priceRange === "5000-15000") matchesPrice = (p.price >= 5000 && p.price <= 15000);
-        else if (priceRange === "15000plus") matchesPrice = (p.price > 15000);
-
-        return matchesName && matchesCategory && matchesPrice;
-    });
-    
-    displayProducts(filtered);
-}
-
 displayProducts(products);
-
-window.onclick = function(event) {
-    if (event.target == document.getElementById("productModal")) closeModal();
-}
 </script>
 
 </body>
