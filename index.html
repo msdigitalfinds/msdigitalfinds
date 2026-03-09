@@ -308,12 +308,8 @@ function openProduct(id){
 
     document.getElementById("modalData").innerHTML=`
         <h2 style="color:#0f172a">${product.name}</h2>
-        <img src="${product.image}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" style="max-width:250px; width:100%; border-radius:10px; margin: 20px 0;">
-        <p class="price" style="color:#e44d26; font-size:1.5rem">
-            Price: ₹${product.price.toLocaleString('en-IN')}
-        </p>
-        <p style="padding:15px; background:#f9f9f9; border-radius:10px; font-size:14px; line-height:1.5;">
-            ${product.desc}
+        
+      
         </p>
         <a class="btn-buy" href="${product.affiliate}" target="_blank">
             Check Latest Price on Amazon
