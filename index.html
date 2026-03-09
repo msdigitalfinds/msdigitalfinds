@@ -117,19 +117,18 @@ footer{ background: var(--dark); color:white; text-align:center; padding:30px; m
 
 <script>
 const products = [
-    { id:1, name:"Sony Digital Camera", price:153990, category:"camera", image:"sony camera.jpg.webp", desc:"Professional photography camera.", affiliate:"https://amzn.to/4s8VcbX" },
-    { id:2, name:"Boat Airbuds", price:2499, category:"audio", image:"airbuds.jpg", desc:"Hybrid ANC earbuds with 50H playtime.", affiliate:"https://amzn.to/3OGT64L" },
-    { id:3, name:"Apple AirPods", price:23990, category:"audio", image:" apple airpods.jpg", desc:"Premium sound with Active Noise Cancellation.", affiliate:"https://amzn.to/3OBvBKx" },
-    { id:4, name:"Mobile Charging Cable", price:9999, category:"accessories", image:"charge.jpg", desc:"Fast charging 140W GaN cable.", affiliate:"https://amzn.to/4rFiTsz" },
-    { id:5, name:" Laptop ", price:68990, category:"laptop", image:"hp laptop.jpg", desc:" HP Smartchoice OmniBook 5 (Previously Pavilion) 50 Tops, AMD Ryzen AI 5 340 (16GB LPDDR5X, 512GB SSD) WUXGA 2K, 16''/40.6cm, Win11, Office24, Silver...", affiliate:"https://amzn.to/4aI8Q04" },
-    { id:6, name:"Counter Machine", price:15998, category:"computer", image:"counter.jpg ", desc:"DOSBERG DB-690 currency counting machine with denomination display and UV, MG, IR, MT, 3D twin sensors. Counts mixed notes, detects counterfeit currency, and shows total value accurately. Ideal for business cash management.", affiliate:"https://amzn.to/4aGM4Wl" },
-    { id:7, name:"Pen Drive ", price:2100, category:"computer", image:" sandisk 1.jpg ", desc:"SanDisk Ultra Dual Drive Luxe 128GB lets you move files between Type-C phones and USB-A laptops at lightning speed up to 400MB/s. Premium metal design with 5-year warranty. Plug in. Transfer. Done.", affiliate:"https://amzn.to/46wnd52" },
-    { id:8, name:"Canon EOS R50", price:64990, category:"camera", image:" canon.jpg", desc:"Mirrorless camera for vlogging.", affiliate:"https://amzn.to/4bcVp8l" },
-    { id:9, name:"boAt Nirvana Crown", price:2799, category:"audio", image:"boats airbords.jpg", desc:"Spatial audio & 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" },
+    { id:1, name:"Sony Digital Camera",  category:"camera", image:"sony camera.jpg.webp", desc:"Professional photography camera.", affiliate:"https://amzn.to/4s8VcbX" },
+    { id:2, name:"Boat Airbuds",  category:"audio", image:"airbuds.jpg", desc:"Hybrid ANC earbuds with 50H playtime.", affiliate:"https://amzn.to/3OGT64L" },
+    { id:3, name:"Apple AirPods", category:"audio", image:" apple airpods.jpg", desc:"Premium sound with Active Noise Cancellation.", affiliate:"https://amzn.to/3OBvBKx" },
+    { id:4, name:"Mobile Charging Cable",  category:"accessories", image:"charge.jpg", desc:"Fast charging 140W GaN cable.", affiliate:"https://amzn.to/4rFiTsz" },
+    { id:5, name:" Laptop ",  category:"laptop", image:"hp laptop.jpg", desc:" HP Smartchoice OmniBook 5 (Previously Pavilion) 50 Tops, AMD Ryzen AI 5 340 (16GB LPDDR5X, 512GB SSD) WUXGA 2K, 16''/40.6cm, Win11, Office24, Silver...", affiliate:"https://amzn.to/4aI8Q04" },
+    { id:6, name:"Counter Machine", category:"computer", image:"counter.jpg ", desc:"DOSBERG DB-690 currency counting machine with denomination display and UV, MG, IR, MT, 3D twin sensors. Counts mixed notes, detects counterfeit currency, and shows total value accurately. Ideal for business cash management.", affiliate:"https://amzn.to/4aGM4Wl" },
+    { id:7, name:"Pen Drive ",  category:"computer", image:" sandisk 1.jpg ", desc:"SanDisk Ultra Dual Drive Luxe 128GB lets you move files between Type-C phones and USB-A laptops at lightning speed up to 400MB/s. Premium metal design with 5-year warranty. Plug in. Transfer. Done.", affiliate:"https://amzn.to/46wnd52" },
+    { id:8, name:"Canon EOS R50",  category:"camera", image:" canon.jpg", desc:"Mirrorless camera for vlogging.", affiliate:"https://amzn.to/4bcVp8l" },
+    { id:9, name:"boAt Nirvana Crown",  category:"audio", image:"boats airbords.jpg", desc:"Spatial audio & 50dB ANC.", affiliate:"https://amzn.to/400HZ9m" },
     {
      id:10,
      name:" Amazfit Active Max Smart Watch ",
-     price:15999,
      category:"smart watches",
      image:"smart watch.jpg",
      desc:"Amazfit Active Max Smart Watch 1.5 inch AMOLED Display, 25-Day Battery, Offline Maps, GPS, 4GB Storage, 170+ Sport Modes, 5 ATM Water Resistant, Heart Rate & Sleep Tracker.",
@@ -138,7 +137,6 @@ const products = [
     {
  id:11,
  name:" RO Water Purifier ",
- price:22200,
  category:"smart device",
  image:"A.jpg ",
  desc:"KENT Sterling Star RO – 6-stage purification (RO+UV+UF+Alkaline+Copper), TDS control, 6L tank, 20 LPH, digital purity display. 4 years free service. Perfect for modular kitchens   ",
@@ -147,7 +145,6 @@ const products = [
     {
  id:12,
  name:"Smart Monitor",
- price:32999,
  category:"computer",
  image:"B.jpg ",
  desc:" UltraWide Monitor curved display HDR Hz built-in speakers, adjustable stand, webOS, AirPlay2 & Bluetooth. Sleek white design. ",
@@ -156,7 +153,6 @@ const products = [
     {
  id:13,
  name:"Noise Pro",
- price:6999,
  category:"smart watches",
  image:" c.jpg ",
  desc:" Noise Pro 6R  AMOLED, nits brightness, built-in GPS, AI tracking, Strava support, stainless steel dial, 3ATM water resistant. Smart, stylish, ready for fitness. ",
@@ -165,7 +161,6 @@ const products = [
     {
  id:14,
  name:"GUESS Asset Men’s Watch",
- price:16995,
  category:"smart watches",
  image:"d.jpg",
  desc:"GUESS Asset Men’s Watch – Elegant round dial, premium finish, water resistant design. A clean, luxury timepiece built for everyday class. ",
@@ -174,7 +169,6 @@ const products = [
     {
  id:15,
  name:"FUNTEREST",
- price:699,
  category:"smart watches",
  image:"e.jpg ",
  desc:" Luxury Antique Silent Wall Clock – Elegant metal design, smooth noise-free movement, and a rich vintage finish. A classy statement piece for home or office décor. ",
@@ -183,7 +177,6 @@ const products = [
     {
  id:16,
  name:"Fire Boltt Aero TWS Earbuds",
- price:799,
  category:"smart watches",
  image:"f.jpg",
  desc:" Fire-Boltt Aero TWS – Bluetooth earbuds with Custom  low latency for gaming, and fast charging case. Clear calls, touch controls, and IPX4 water resistance in a sleek black design. ",
@@ -192,7 +185,6 @@ const products = [
     {
  id:17,
  name:"laptop stand",
- price:497,
  category:"laptop",
  image:" g.jpg ",
  desc:" BKN® Mini Metal Laptop Stand – Premium folding risers with non-slip base devices. Strong, compact, and designed to add a clean, elevated look to your workspace. ",
@@ -201,7 +193,6 @@ const products = [
     {
  id:18,
  name:"Sony Alpha ILCE camera",
- price:72499,
  category:"camera",
  image:"aa.jpg",
  desc:" Sony Alpha ILCE 6100X Mirrorless Camera 24.2MP APS C Sensor Fast Auto Focus Tiltable LCD Includes SELP1650 Power Zoom Lens Ver 2 and SEL55210 Lens Black",
@@ -210,7 +201,6 @@ const products = [
     {
  id:19,
  name:" IZI IRIS Pocket Gimbal Vlogging Camera ",
- price:24499,
  category:"camera",
  image:"aaa.jpg ",
  desc:" IZI IRIS Pocket Gimbal Vlogging Camera 4K 60FPS AI Tracking Detachable 3 Axis Stabilizer Dual AMOLED Display 160min Battery Support up to 512GB Storage ",
@@ -219,7 +209,6 @@ const products = [
     {
  id:20,
  name:"Canon EOS R100 Mirrorless Camera",
- price:43990,
  category:"camera",
  image:"abb.jpg ",
  desc:"Canon EOS R100 24.1MP Mirrorless Camera Black with RF S18 45mm F4.5 6.3 IS STM Lens 4K Video ",
@@ -228,7 +217,6 @@ const products = [
     {
  id:21,
  name:"SanDisk Extreme 128GB SD Card",
- price:3199,
  category:"Storage Devices",
  image:"abc.jpg ",
  desc:"High speed 128GB SD card with up to 180MB read and 90MB write speed. Ideal for 4K video recording and professional photography  ",
@@ -237,7 +225,6 @@ const products = [
   {
  id:22,
  name:"ADOFYS 49 in 1 Action Camera Accessories Kit for GoPro Insta360 DJI",
- price:1316,
  category:"Accessories",
  image:"zxz.jpg",
  desc:"Universal 49 in 1 accessories bundle compatible with GoPro Hero models SJCAM Insta360 DJI and Xiaomi Yi. Includes mounts straps and essential gear for stable and versatile shooting",
@@ -246,7 +233,6 @@ const products = [
     {
  id:23,
  name:"Sony Alpha ZV E10M2K 26MP Mirrorless Vlog Camera 4K",
- price:92490,
  category:"camera",
  image:" zbz.jpg ",
  desc:" 26MP APS C mirrorless camera with 16 50mm power zoom lens and 4K 60p recording. Built for creators with advanced video quality fast autofocus and professional performance. ",
@@ -255,7 +241,6 @@ const products = [
     {
  id:24,
  name:"Noise Master Buds with Bose Sound ANC Bluetooth Earbuds",
- price:6999,
  category:"Audio",
  image:"aza.jpg ",
  desc:" Premium in ear Bluetooth earbuds with adaptive ANC up to 49dB LHDC 5.0 and immersive spatial audio. Up to 44 hours playtime with six mic ENC for clear calls and powerful sound  ",
@@ -264,17 +249,16 @@ const products = [
     {
  id:25,
  name:"Lemorele 13 in 1 USB C Docking Station 10Gbps Dual 4K",
- price:4844,
  category:"Computer Items",
  image:" a4.jpg",
  desc:" High speed 13 in 1 USB C hub with dual 4K HDMI VGA Gigabit RJ45 PD 100W charging and SD MicroSD slots. Ideal for laptops needing full connectivity and powerful expansion  ",
  affiliate:" https://amzn.to/4cqNXrw"
      },
- { id:26, name:"IZI GO X Lite AI Tracking Smartphone Gimbal Stabilizer", price:3629, category:"camera", image:"c1.jpg", desc:"IZI GO X Lite is a smart AI-tracking smartphone stabilizer with automatic rotation and a 420mm telescopic rod. Designed for smooth vlogging, stable videos, and professional content creation", affiliate:"https://amzn.to/4b7FGpQ" },
- { id:27, name:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop Gas Stove", price:15499, category:"Home Appliances", image:"c2.jpg", desc:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop features auto ignition, digital timer, and flame failure safety for modern kitchens. Built with toughened glass and compatible with LPG & PNG for safe, stylish cooking", affiliate:"https://amzn.to/4lldVz6" },
-    { id:28, name:"Lavie Sport Emperor Anti-Theft Laptop Backpack 24L", price:2159, category:"Accessories", image:"c3.jpg", desc:"Lavie Sport Emperor Anti-Theft Backpack features a durable premium design with a secure laptop sleeve for up to 15-inch notebooks. Spacious 24L capacity makes it perfect for office, travel, and daily business use", affiliate:"https://amzn.to/4b6aqrs " },
-    { id:29, name:"SanDisk Cruzer Blade 128GB USB Flash Drive", price:1300, category:"Storage Devices", image:"c4.jpg", desc:" SanDisk Cruzer Blade 128GB USB flash drive offers reliable storage in a compact design, perfect for storing photos, videos, and important files. Easy plug-and-play use with dependable performance and 5-year warranty", affiliate:"https://amzn.to/4l9lo42" },
-    { id:30, name:"Apple USB-C to Lightning Cable 1m", price:1599, category:"Accessories", image:"c5.jpg", desc:"Apple USB-C to Lightning Cable delivers fast charging and reliable data transfer for iPhone and iPad. Built with Apple’s premium quality for safe, durable everyday performance ", affiliate:" https://amzn.to/4udH5nK" }
+ { id:26, name:"IZI GO X Lite AI Tracking Smartphone Gimbal Stabilizer",  category:"camera", image:"c1.jpg", desc:"IZI GO X Lite is a smart AI-tracking smartphone stabilizer with automatic rotation and a 420mm telescopic rod. Designed for smooth vlogging, stable videos, and professional content creation", affiliate:"https://amzn.to/4b7FGpQ" },
+ { id:27, name:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop Gas Stove", category:"Home Appliances", image:"c2.jpg", desc:"Beyond Appliances Dorado 3 Burner Smart Glass Hobtop features auto ignition, digital timer, and flame failure safety for modern kitchens. Built with toughened glass and compatible with LPG & PNG for safe, stylish cooking", affiliate:"https://amzn.to/4lldVz6" },
+    { id:28, name:"Lavie Sport Emperor Anti-Theft Laptop Backpack 24L", category:"Accessories", image:"c3.jpg", desc:"Lavie Sport Emperor Anti-Theft Backpack features a durable premium design with a secure laptop sleeve for up to 15-inch notebooks. Spacious 24L capacity makes it perfect for office, travel, and daily business use", affiliate:"https://amzn.to/4b6aqrs " },
+    { id:29, name:"SanDisk Cruzer Blade 128GB USB Flash Drive", category:"Storage Devices", image:"c4.jpg", desc:" SanDisk Cruzer Blade 128GB USB flash drive offers reliable storage in a compact design, perfect for storing photos, videos, and important files. Easy plug-and-play use with dependable performance and 5-year warranty", affiliate:"https://amzn.to/4l9lo42" },
+    { id:30, name:"Apple USB-C to Lightning Cable 1m",  category:"Accessories", image:"c5.jpg", desc:"Apple USB-C to Lightning Cable delivers fast charging and reliable data transfer for iPhone and iPad. Built with Apple’s premium quality for safe, durable everyday performance ", affiliate:" https://amzn.to/4udH5nK" }
 ];
 
 
