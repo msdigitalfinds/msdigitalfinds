@@ -150,7 +150,18 @@ const products = [
     { id:47, name:"Dual Lens 360° WiFi AI Security Camera", category:"camera", image:"bb7.jpg", desc:" Smart indoor security camera with dual lens 360° view full HD night vision motion detection and two way audio for advanced home monitoring and safety", affiliate:" https://amzn.to/4bd9KSy" },
     { id:48, name:"TIMEX Navi Analog White Dial Men's Watch", category:"smart watches", image:"bb8.jpg", desc:" Classic analog watch with elegant white round dial and stainless steel bracelet offering timeless style durability and water resistant performance", affiliate:"https://amzn.to/4s6YtJi " },
     { id:49, name:"SanDisk Ultra Dual Drive Luxe Type C 1TB USB Flash Drive", category:"Accessories", image:"bb9.jpg", desc:" Premium metal 1TB USB flash drive with dual Type C and USB connectors offering ultra fast transfer speeds up to 400MB per second and elegant gold design", affiliate:"https://amzn.to/4s8KrH3 " },
-    { id:50, name:"Noise Pulse 4 Max Smartwatch AMOLED Display", category:"smart watches", image:"bb10.jpg", desc:" Advanced smartwatch with 1.96 inch AMOLED display AI watch face creation functional crown and premium metallic design built for smart style and health tracking", affiliate:"https://amzn.to/4beKX0s " }
+    { id:50, name:"Noise Pulse 4 Max Smartwatch AMOLED Display", category:"smart watches", image:"bb10.jpg", desc:" Advanced smartwatch with 1.96 inch AMOLED display AI watch face creation functional crown and premium metallic design built for smart style and health tracking", affiliate:"https://amzn.to/4beKX0s " },
+    { id:51, name:" BrowseBook 14.1 Inch FHD Laptop for Students", category:"Laptop Monitor", image:"cc1.jpg", desc:" Lightweight laptop with 14.1 inch FHD display Intel Celeron processor 4GB RAM and 128GB SSD ideal for study office work and everyday tasks", affiliate:"https://amzn.to/3PvYurT " },
+    { id:52, name:"NAVIFORCE Green Dial Analog Men's Watch", category:"smart watches", image:"cc2.jpg", desc:"Stylish analog watch with bold green dial and matching strap designed for a modern sporty look with reliable everyday performance ", affiliate:"https://amzn.to/4sFTT5g " },
+    { id:53, name:"GOBOULT Earl TWS Earbuds Hybrid ANC", category:"audio", image:"cc3.jpg", desc:" Premium wireless earbuds with hybrid ANC up to 50dB dual drivers and 50 hours playtime delivering immersive sound clear calls and smooth connectivity", affiliate:" https://amzn.to/4bMFeOl" },
+    { id:54, name:"Primebook 2 Neo 2025 Android Laptop 6GB 128GB", category:"Laptop Monitor", image:"cc4.jpg", desc:" Compact 11.6 inch Android laptop with MediaTek Helio G99 processor 6GB RAM and expandable storage designed for students multitasking and everyday productivity", affiliate:"https://amzn.to/4rR0CYR " },
+    { id:55, name:"Lemorele 6 in 1 USB C Hub Dual HDMI 4K Dock", category:"Accessories", image:"cc5.jpg", desc:" Compact USB C hub with dual 4K HDMI output 100W PD charging and USB 3.0 ports designed for laptops gaming and workstation setup", affiliate:"https://amzn.to/3Q198XJ " },
+    { id:56, name:"GRENARO Lavalier Wireless Mic with Noise Reduction", category:"Accessories", image:"cc6.jpg", desc:" Compact lavalier wireless mic with 3 level noise reduction and 52 hours charging case designed for clear audio in YouTube videos vlogging live streaming and content creation", affiliate:" https://amzn.to/3PvjnDE" },
+    { id:57, name:"K13 Dual Channel Wireless Mic with Noise Cancellation", category:"Accessories", image:"cc7.jpg", desc:"Portable wireless mic with dual channel recording and noise cancellation for clear audio in vlogging video recording and live streaming includes charging case ", affiliate:" https://amzn.to/4uSge0I" },
+    { id:58, name:"OnePlus Nord Buds 3R TWS Earbuds Ash Black", category:"audio", image:"cc8.jpg", desc:" Wireless earbuds with 12.4mm drivers 3D spatial audio and up to 54 hours playback delivering clear calls smooth connectivity and low latency performance", affiliate:"https://amzn.to/3NqkIuT " },
+    { id:59, name:"Digitek DWM 116 2 in 1 Wireless Microphone", category:"Accessories", image:"cc9.jpg", desc:" Versatile wireless mic with magnetic clip 360 degree sound capture and up to 40m range designed for interviews vlogging and content creation across DSLR iOS and Android devices", affiliate:" https://amzn.to/3Pwe7zK" },
+    { id:60, name:"DJI Osmo Pocket 3 4K Vlogging Camera", category:"camera", image:"cc10.jpg", desc:" Compact vlogging camera with 1 inch sensor 4K 120fps video and 3 axis stabilization delivering smooth cinematic footage with fast focus and smart tracking", affiliate:" https://amzn.to/4uX89YU" }
+ 
 ];
 
 let currentTab = 'featured';
@@ -161,7 +172,8 @@ function displayProducts(data) {
     let displayData = (currentTab === 'featured') ? data.slice(0, 8) : data;
 
     displayData.forEach(p => {
-        container.innerHTML += `
+  
+      container.innerHTML += `
         <div class="card" onclick="openProduct(${p.id})">
             <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300?text=Digital+Product'">
             <h3>${p.name}</h3>
